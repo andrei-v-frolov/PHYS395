@@ -1,0 +1,12 @@
+#!/usr/bin/env gnuplot
+
+# configure output
+set terminal pdf
+set output "fibonacci.pdf"
+
+#set size 0.6
+set title "Fibonacci sequence"
+set xlabel "n"
+set ylabel "F_n"
+
+plot 'fibonacci.dat'
