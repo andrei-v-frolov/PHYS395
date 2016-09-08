@@ -2,3 +2,13 @@
 a.out
 *.o
 *.mod
+
+# ignore data files
+*.dat
+
+# ignore derived plots
+*.eps
+*.pdf
+*.svg
+*.png
+*.gif
