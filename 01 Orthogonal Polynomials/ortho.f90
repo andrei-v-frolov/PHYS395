@@ -1,10 +1,15 @@
+! ortho.f90  -  orthogonal polynomials primer
+! compile with: gfortran -O3 -fdefault-real-8 ortho.f90
+
 program ortho; implicit none
 
 integer, parameter :: n = 15, k = 3
+
 real, parameter :: pi = 3.141592653589793238462643383279502884197169399375Q0
 
+real x(n)	! function is evaluated at these (grid) points
+real y(n)	! values of the function y = f(x) at these points
 
-real x(n), y(n)
 integer i
 
 do i = 1,n
@@ -38,7 +43,7 @@ pure function LegendreP(k, x)
 	do n = 1,k-1
 		P(n+1) = ((2*n+1)*x*P(n) - n*P(n-1))/(n+1)
 	end do
-
+	
 	LegendreP = P(k)
 end function
 
