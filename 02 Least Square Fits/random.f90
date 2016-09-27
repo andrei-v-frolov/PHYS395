@@ -9,6 +9,8 @@ real x(n), y(n)
 
 integer i
 
+call random_seed()
+
 call random_number(x)
 call random_number(y)
 
