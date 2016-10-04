@@ -2,9 +2,9 @@ program bisection; implicit none
 
 real x
 
-x = bisect(-5.0, 15.0)
+x = bisect(0.0, 5.0)
 
-!write (*,*) x
+write (*,*) x
 
 contains
 
