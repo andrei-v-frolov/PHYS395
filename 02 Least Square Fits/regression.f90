@@ -1,3 +1,6 @@
+! regression.f90  -  fit y = a*x + b to (x,y) data read from stdin
+! compile with: gfortran -O3 -fdefault-real-8 regression.f90
+
 program regression; implicit none
 
 real sxx, sxy, sy, sx, s

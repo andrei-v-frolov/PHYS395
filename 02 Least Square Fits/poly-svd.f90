@@ -1,4 +1,4 @@
-! poly.f90  -  showcase for polynomial approximation techniques
+! poly-svd.f90  -  showcase for polynomial approximation techniques
 ! compile with: gfortran -O3 -fdefault-real-8 poly-svd.f90 -llapack
 
 program expansion; implicit none
