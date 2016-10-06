@@ -1,0 +1,22 @@
+#!/usr/bin/env gnuplot
+
+# configure plot output
+set terminal postscript eps enhanced solid color; set size 0.80
+set key top right Left reverse
+
+# compile and run the code
+! ifort -xHOST -O3 -ipo -r8 fake.f90 && time ./a.out > DATA
+
+f(x) = a + b*cos(2*pi*x) + c*cos(4*pi*x) + d*cos(6*pi*x)
+fit f(x) 'periodic.dat' via a,b,c,d
+
+# plot approximation
+set title "{/Times-Roman*1.5 Periodic process sampled over a single period}"
+set output "periodic.eps"
+plot 'periodic.dat' t 'sampled data          '
+
+set output "bestfit.eps"
+plot 'periodic.dat' t 'sampled data', f(x) t 'best fit model', exp(log(10)*cos(2*pi*x))-4 t 'original function f(x)'
+
+# convert plots to PDF (if you have epstopdf)
+! epstopdf periodic.eps; epstopdf bestfit.eps
