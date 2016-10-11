@@ -12,9 +12,10 @@ function bracket(a0, c0)
 	real a0, c0, bracket
 	real a, b, c, d, fa, fb, fc, fd
 	real, parameter :: eps = 1.0e-16
+	real, parameter :: alpha = 1.5 - sqrt(5.0)/2.0
 	
 	a = a0; fa = f(a)
-	b = (a0 + c0)/2.0; fb = f(b) ! adjust!
+	b = a0 + alpha*(c0-a0); fb = f(b) ! adjust!
 	c = c0; fc = f(c)
 	
 	!if ((fb-fa)*(fc-fb) > 0) call abort
