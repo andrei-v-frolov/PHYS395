@@ -4,7 +4,7 @@ integer, parameter :: n = 2
 
 real, parameter :: m = 1.0
 real, parameter :: k = 1.0
-real, parameter :: dt = 0.1/2.0
+real, parameter :: dt = 0.001
 
 real y(n), t, E0
 
@@ -12,8 +12,10 @@ integer i
 
 t = 0.0; y(1) = 1.0; y(2) = 0.0; E0 = E(y,t)
 
-do i = 1,1000
+do i = 1,100000
 	write (*,*) t, y, (E(y,t)-E0)/E0
+	write (*,*) ""; write (*,*) ""
+	
 	call rk4(y, t, dt)
 end do
 

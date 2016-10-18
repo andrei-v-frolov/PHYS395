@@ -2,7 +2,7 @@ program euler; implicit none
 
 real, parameter :: m = 1.0
 real, parameter :: k = 1.0
-real, parameter :: dt = 0.1/2.0
+real, parameter :: dt = 0.1
 
 real x, v, E0
 
