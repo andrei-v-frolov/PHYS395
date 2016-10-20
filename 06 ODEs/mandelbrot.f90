@@ -3,7 +3,7 @@
 
 program mandelbrot; implicit none
 
-integer, parameter :: nx = 1024, ny = 1024, iterations = 1000
+integer, parameter :: nx = 3 * 2**11, ny = 2**12, iterations = 1000
 real(8), parameter :: xrange(2) = [-2.5,1.0], yrange(2) = [-1.0,1.0]
 
 real(4), allocatable :: image(:,:,:)
