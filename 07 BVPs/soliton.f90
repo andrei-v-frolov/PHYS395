@@ -8,11 +8,15 @@ program odetest; implicit none
 
 real, parameter :: dt = 1.0e-2
 
-integer l; real :: y(2) = (/ 0.0, 0.5 /)
+integer l; real :: y(2) = (/ 0.0, 0.7071 /)
+
+!write (*,*) bc(0.5), bc(0.7), bc(0.71)
+
+y(2) = bisect(0.5, 0.8)
 
 do l = 1,2**10
-	! output time, position, velocity, error in energy
-        write (*,'(4g24.16)') (l-1)*dt, y, y(1)**4/4.0 + y(2)**2/2.0 - 0.25
+	! output time, position, velocity
+        write (*,'(4g24.16)') (l-1)*dt, y
         
         ! step forward with your choice of numerical scheme
         call gl8(y, dt)
@@ -21,17 +25,50 @@ end do
 
 contains
 
+function bc(v)
+	real bc, v, y(2)
+	
+	y = (/ 0.0, v /)
+	
+	do l = 1,2**10; call gl8(y, dt); end do
+	
+	bc = y(1) - 1.0
+	
+	! guard for runaway solution
+	if (isnan(bc)) bc = huge(bc)
+end function
+
+function bisect(a0, b0)
+	real a0, b0, bisect
+	real a, b, c, fa, fb, fc
+	real, parameter :: eps = 1.0e-15
+	
+	a = a0; fa = bc(a)
+	b = b0; fb = bc(b)
+	
+	if (fa*fb > 0) call abort
+	
+	do while (abs(b-a) > eps)
+		c = (a+b)/2.0; fc = bc(c); if (fc == 0.0) exit
+		if (fa*fc < 0.0) then; b = c; fb = fc; end if
+		if (fc*fb < 0.0) then; a = c; fa = fc; end if
+	end do
+	
+	bisect = c
+end function
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! implicit Gauss-Legendre methods; symplectic with arbitrary Hamiltonian, A-stable
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 elemental function F(phi)
     real F, phi
     intent(in) phi
     
     F = (phi**2 - 1.0) * phi
 end function
-
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! implicit Gauss-Legendre methods; symplectic with arbitrary Hamiltonian, A-stable
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ! evaluate derivatives
 subroutine evalf(y, dydx)
