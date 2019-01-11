@@ -1,5 +1,8 @@
 #!/usr/bin/env gnuplot
 
+set terminal pdf enhanced
+set output 'sinx.pdf'
+
 set xlabel 'x'
 set ylabel 'y'
 
