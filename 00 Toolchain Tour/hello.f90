@@ -1,3 +1,6 @@
+! compile with: gfortran -O3 -fdefault-real-8 hello.f90 -o hello
+! run with:     ./hello > DATA
+
 program hello
 implicit none
 

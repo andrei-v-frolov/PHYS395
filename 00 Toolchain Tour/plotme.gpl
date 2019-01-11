@@ -1,0 +1,6 @@
+#!/usr/bin/env gnuplot
+
+set xlabel 'x'
+set ylabel 'y'
+
+plot 'DATA' with lines
