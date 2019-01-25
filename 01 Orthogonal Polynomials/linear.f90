@@ -1,5 +1,5 @@
 ! linear.f90  -  solve linear system of equations using LAPACK
-! compile with: gfortran -O3 -fdefault-real-8 linear.f90
+! compile with: gfortran -O3 -fdefault-real-8 linear.f90 -llapack
 
 program test
 implicit none
