@@ -19,6 +19,9 @@ if (fa*fb > 0.0) stop "The root is not bracketed, bailing out..."
 do while (abs(b-a) > epsilon)
 	c = (a+b)/2.0; fc = f(c); if (fc == 0.0) exit
 	
+	! Ridder's variation on the basic method
+	c = c + (c-a)*sign(1.0,fa-fb)*fc/sqrt(fc*fc-fa*fb); fc = f(c)
+	
 	write (*,*) c, fc
 	
 	if (fa*fc < 0.0) then; b = c; fb = fc; end if
