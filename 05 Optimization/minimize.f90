@@ -1,5 +1,5 @@
-! descent-2d.f90  -  steepest descent in n dimensions
-! compile with: gfortran -O3 -fdefault-real-8 descent-2d.f90
+! minimize.f90  -  minimization in n dimensions
+! compile with: gfortran -O3 -fdefault-real-8 minimize.f90
 
 program descent
 implicit none
