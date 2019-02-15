@@ -15,7 +15,7 @@ real, parameter :: mu = 3.0
 integer, parameter :: chains = 100
 
 ! size of the random step to take
-real, parameter :: sigma = 0.01
+real, parameter :: sigma = 0.1
 
 ! number of random step to take
 integer, parameter :: steps = 2000
@@ -34,7 +34,7 @@ call random_seed()
 ! initial parameter values are random and unform
 call random_number(x); x = 4.0*x - 2.0
 
-call dump(x)
+!call dump(x)
 
 ! random walk
 do l = 1,steps
@@ -46,7 +46,8 @@ do l = 1,steps
 		if (f(y(:,i))/f(x(:,i)) >= A(i)) x(:,i) = y(:,i)
 	end do
 	
-	call dump(x)
+	! wait until the chains converge and prune output
+	if (l > steps/2 .and. mod(l,10) == 0) call dump(x)
 end do
 
 contains
