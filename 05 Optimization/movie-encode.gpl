@@ -1,0 +1,22 @@
+#!/usr/bin/env gnuplot
+
+set terminal png enhanced notransparent font "Helvetica Neue,72" size 2400,2400
+
+set size square
+set xrange [-2:2]
+set yrange [-2:2]
+set nokey
+
+set border linewidth 9.0
+
+do for [frame = 0:2000] {
+    set output sprintf("frame-%04i.png", frame)
+    plot 'DATA' index frame with points pt 7 ps 3
+}
+
+# rescale the frames by a factor of 3 to anti-alias the image
+! for f in frame-*.png; do convert -scale 800x800 "$f" "$f"; done
+
+# encode using mencoder (presets for iPhone compatibility), Apple Compressor, or Adobe Media Encoder
+# mencoder -ovc x264 mf://"*.png" -x264encopts crf=28:vbv_maxrate=1500:nocabac:global_header:frameref=3:threads=auto:bframes=0:subq=6:mixed-refs=0:weightb=0:8x8dct=1:me=umh:partitions=all:qp_step=4:qcomp=0.7:trellis=1:direct_pred=auto -o test.mp4
+# rm -f frame-*.png

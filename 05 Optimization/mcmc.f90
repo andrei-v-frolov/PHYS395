@@ -15,7 +15,7 @@ real, parameter :: mu = 3.0
 integer, parameter :: chains = 100
 
 ! size of the random step to take
-real, parameter :: sigma = 0.1
+real, parameter :: sigma = 0.01
 
 ! number of random step to take
 integer, parameter :: steps = 2000
