@@ -1,5 +1,6 @@
 ! mcmc.f90  -  maximum likelihood finder using Markov Chain Monte Carlo
 ! compile with: gfortran -O3 -fdefault-real-8 mcmc.f90 && a.out > DATA
+! animate on-screen: gnuplot movie-screen.gpl
 
 program mcmc
 implicit none

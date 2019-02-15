@@ -1,0 +1,8 @@
+# animate.gpl  -  gnuplot script for frame by frame animation
+# 
+# Usage:
+#   frame=0; plot 'data' index frame; load 'animate.gpl'
+
+frame = frame+1
+replot
+reread

@@ -1,0 +1,7 @@
+#!/usr/bin/env gnuplot
+
+set size square
+set xrange [-2:2]
+set yrange [-2:2]
+
+frame = 0; plot 'DATA' index frame; load 'animate.gpl'
