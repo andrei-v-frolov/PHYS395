@@ -39,11 +39,11 @@ hdu.close()
 figure(figsize=(10,8), frameon=False)
 
 # plot image data
-c = matplotlib.colors.LinearSegmentedColormap.from_list("difference", ["blue", "white", "red"])
+c = matplotlib.colors.LinearSegmentedColormap.from_list("difference", ["blue", "white", "black"])
 im = imshow(data, extent=(x[0],x[-1],y[0],y[-1]), origin='lower', aspect=dx/dy, cmap=c, interpolation='none')
 
 # plot contours
-contour(X, Y, data, 32, cmap=cm.jet)
+#contour(X, Y, data, 32, cmap=cm.jet)
 
 # make colorbar match the plot
 divider = make_axes_locatable(plt.gca())
