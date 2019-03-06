@@ -175,7 +175,7 @@ program SimpleSolarSystem     ! dynamical Solar system model
         end if
         
         ! advance one time step
-        call si6(dt); t = t + dt
+        call si(10,dt); t = t + dt
     end do
 contains
 
@@ -202,5 +202,18 @@ subroutine si6(dt)
     do i = -3,3; call leapfrog(w(abs(i))*dt); end do
 end subroutine si6
 
+! here's a general trick which bumps the order by two
+! k-th order recursive symplectic integrator (k should be even)
+recursive subroutine si(k, dt)
+        real dt, gamma, w1, w0; integer k
+        
+        select case (k)
+                case (2); call leapfrog(dt)
+                case (6); call si6(dt)
+                case default
+                        gamma = 1.0/(k-1); w1 = 1.0/(2.0 - 2.0**gamma); w0 = 1.0 - 2.0*w1
+                        call si(k-2, w1*dt); call si(k-2, w0*dt); call si(k-2, w1*dt)
+        end select
+end subroutine si
 
 end program SimpleSolarSystem
