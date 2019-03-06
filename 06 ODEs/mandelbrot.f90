@@ -1,31 +1,40 @@
+! mandelbrot.f90  -  Mandelbrot fractal renderer (a demo for FITS format output)
+! compile with: gfortran -O3 -fdefault-real-8 mandelbrot.f90 -lcfitsio [-lcurl]
+
 program mandelbrot
 implicit none
 
-! image size
-integer, parameter :: n = 1024
-
-! scan bounds
-real, parameter :: xx(2) = [-2.0, 2.0]
-real, parameter :: yy(2) = [-2.0, 2.0]
+! image size, number of iterations, and scan bounds
+integer, parameter :: nx = 3 * 2**11, ny = 2**12, iterations = 2**10
+real(8), parameter :: xx(2) = [-2.5, 1.0], yy(2) = [-1.0, 1.0]
 
 ! data array
-real(4) data(3,n,n)
+real(4) data(1,nx,ny)
 
-integer i, j
+! temporary variables
+integer i, j, k
+complex z, c
+real x, y
 
-data = 0.0
-
-! paraboloid
-forall (i=1:n, j=1:n) data(1,i,j) = (i-n/2.0)**2 + (j-n/2.0)**2
-
-! hyperboloid
-forall (i=1:n, j=1:n) data(2,i,j) = (i-n/2.0)**2 - (j-n/2.0)**2
-
-! checkerboard
-forall (i=1:n, j=1:n) data(3,i,j) = mod(i/64 + j/64,2)
+! Mandelbrot iterator
+do i = 1,nx; x = xx(1) + (xx(2)-xx(1))*(i-1)/(nx-1)
+        do j = 1,ny; y = yy(1) + (yy(2)-yy(1))*(j-1)/(ny-1)
+                z = 0.0; c = complex(x,y)
+                
+                do k = 0,iterations
+                        if (abs(z) > 2.0) exit
+                        z = z*z + c
+                end do
+                
+                data(1,i,j) = k
+                
+                ! make color map continious
+                if (k < iterations) data(1,i,j) = data(1,i,j) + 1.0 - log(abs(z)/log(2.0))/log(2.0)
+        end do
+end do
 
 ! write out image to file
-call write2fits('data.fit', data, xx, yy, ['red  ', 'green', 'blue '], '(x,y)')
+call write2fits('data.fit', data, xx, yy, ['iterations'], '(x,y)')
 
 contains
 
