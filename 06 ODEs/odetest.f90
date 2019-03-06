@@ -11,12 +11,12 @@ real, parameter :: dt = 7.416298709205487673735401388781040185Q0/2**7
 integer l; real :: y(2) = (/ 1.0, 0.0 /)
 
 do l = 1,2**10
-	! output time, position, velocity, error in energy
+        ! output time, position, velocity, error in energy
         write (*,'(4g24.16)') (l-1)*dt, y, y(1)**4/4.0 + y(2)**2/2.0 - 0.25
         
         ! step forward with your choice of numerical scheme
-	!call rk4(y, 2, (l-1)*dt, dt, y)
-	!call si(8, y, dt)
+        !call rk4(y, 2, (l-1)*dt, dt, y)
+        !call si(8, y, dt)
         call gl6(y, dt)
 end do
 
@@ -29,23 +29,23 @@ contains
 
 ! split Hamiltonian evolution step
 subroutine si2(y, dt)
-	real y(2), dt
-	
-	y(1) = y(1) + y(2) * (dt/2.0)
-	y(2) = y(2) - y(1)**3 * dt
-	y(1) = y(1) + y(2) * (dt/2.0)
+        real y(2), dt
+        
+        y(1) = y(1) + y(2) * (dt/2.0)
+        y(2) = y(2) - y(1)**3 * dt
+        y(1) = y(1) + y(2) * (dt/2.0)
 end subroutine si2
 
 ! we can increase the order by taking a magical sequence of time steps
 ! see Yoshida's paper: http://dx.doi.org/10.1016/0375-9601(90)90092-3
 subroutine si6(y, dt)
-	real y(2), dt; integer i
-	real, parameter :: w(0:3) = (/ &
-		 1.31518632068391121888424972823886251Q0, &
-		-1.17767998417887100694641568096431573Q0, &
-		 0.235573213359358133684793182978534602Q0, &
-		 0.784513610477557263819497633866349876Q0 /)
-	
+        real y(2), dt; integer i
+        real, parameter :: w(0:3) = (/ &
+                 1.31518632068391121888424972823886251Q0, &
+                -1.17767998417887100694641568096431573Q0, &
+                 0.235573213359358133684793182978534602Q0, &
+                 0.784513610477557263819497633866349876Q0 /)
+        
 	do i = -3,3; call si2(y, w(abs(i))*dt); end do
 end subroutine si6
 
@@ -196,10 +196,10 @@ end subroutine gl10
 
 ! field derivatives on initial surface
 subroutine derivs(x, y, dydx)
-	real x, y(2), dydx(2)
-	
-	dydx(1) = y(2)
-	dydx(2) = -y(1)**3
+        real x, y(2), dydx(2)
+        
+        dydx(1) = y(2)
+        dydx(2) = -y(1)**3
 end subroutine derivs
 
 ! 4th order Runge-Kutta integrator with fixed step size
