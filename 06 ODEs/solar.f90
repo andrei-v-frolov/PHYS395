@@ -14,7 +14,7 @@ integer, parameter      :: N = 10               ! number of particles
 real*8, dimension(N)    :: M                    ! masses of each particle
 real*8, dimension(D,N)  :: X, V, A              ! position, velocity, acceleration
 
-real*8, parameter       :: eps2 = 1.0D-8**2     ! potential softening
+real*8, parameter       :: eps2 = 0.0           ! potential softening
 real*8                  :: Ekin, Epot, Etot     ! energy of the system
 
 contains
@@ -26,7 +26,7 @@ subroutine Accel        !-------------------------------------------------------
     
     !$omp parallel do
     do i=1,N
-    do j=1,N
+    do j=1,N; if (j == i) cycle
         A(:,i) = A(:,i) + M(j)*(X(:,j)-X(:,i))/sqrt( sum( (X(:,j)-X(:,i))**2 + eps2 )**3 )
     end do
     end do
