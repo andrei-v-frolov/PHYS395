@@ -6,7 +6,7 @@ implicit none
 
 ! image size, number of iterations, and scan bounds
 integer, parameter :: nx = 3 * 2**11, ny = 2**12, iterations = 2**10
-real(8), parameter :: xx(2) = [-2.5, 1.0], yy(2) = [-1.0, 1.0]
+real(8), parameter :: xx(2) = [-2.0, 1.0], yy(2) = [-1.0, 1.0]
 
 ! data array
 real(4) data(1,nx,ny)
@@ -29,12 +29,12 @@ do i = 1,nx; x = xx(1) + (xx(2)-xx(1))*(i-1)/(nx-1)
                 data(1,i,j) = k
                 
                 ! make color map continious
-                if (k < iterations) data(1,i,j) = data(1,i,j) + 1.0 - log(abs(z)/log(2.0))/log(2.0)
+                if (k < iterations) data(1,i,j) = k+1 - log(log(abs(z))/log(2.0))/log(2.0)
         end do
 end do
 
 ! write out image to file
-call write2fits('data.fit', data, xx, yy, ['iterations'], '(x,y)')
+call write2fits('data.fit', log(1+data), xx, yy, ['iterations'], '(x,y)')
 
 contains
 
