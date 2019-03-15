@@ -108,7 +108,7 @@ end subroutine gl10
 ! integrate equations of motion for a given amount of time
 function integrate(x, y, t, dt)
 	real x, y, t, dt, integrate(4)
-	real u(4), E0; integer n
+	real u(4), E0; integer i, n
 	
 	! start from a given position at rest
 	u = [x, y, 0.0, 0.0]; E0 = V(x,y)
