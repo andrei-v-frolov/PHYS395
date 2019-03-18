@@ -27,7 +27,7 @@ dt = 0.01/sqrt((1.0+g2)*maxval(yy**2) + g2*maxval(xx*2))
 !$omp parallel do
 do j = 1,ny
 do i = 1,nx
-                data(:,i,j) = integrate(xx(1) + (xx(2)-xx(1))*(i-1)/(nx-1), yy(1) + (yy(2)-yy(1))*(j-1)/(ny-1), 100.0, dt)
+                data(:,i,j) = integrate(xx(1) + (xx(2)-xx(1))*(i-1)/(nx-1), yy(1) + (yy(2)-yy(1))*(j-1)/(ny-1), 10.0, dt)
 end do
 end do
 
@@ -127,7 +127,7 @@ function integrate(x, y, t, dt)
 	integrate = u
 end function
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! write array data into FITS file as sequence of image extensions
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
