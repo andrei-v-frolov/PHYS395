@@ -1,4 +1,4 @@
-! floquet.f90  -  Floquet theory demo for parametric resonance
+! floquet.f90  -  Floquet theory demo applied to parametric resonance
 ! compile with: gfortran -O3 -fdefault-real-8 -fopenmp floquet.f90 -lcfitsio [-lcurl]
 
 program floquet
@@ -21,7 +21,7 @@ real(4), allocatable :: data(:,:,:)
 ! temporary variables
 integer i, j
 
-allocate(data(1,nx,ny))
+allocate(data(2,nx,ny))
 
 ! phase space scan
 !$omp parallel do
@@ -32,7 +32,7 @@ end do
 end do
 
 ! write out image to file
-call write2fits('data.fit', data, xx, yy, ['mu'], '(q,a)')
+call write2fits('data.fit', data, xx, yy, ['Re(mu)','Im(mu)'], '(q,a)')
 
 contains
 
@@ -47,6 +47,14 @@ contains
 subroutine evalf(u, dudt, p, q)
         real u(6), dudt(6), p, q
         
+        ! driver oscillator:
+        ! [x, v] = [ u(1), u(2) ]
+        
+        ! principal matrix of a driven oscillator:
+        ! [y1 y2] = [ u(3) u(4) ]   =   [1 0]
+        ! [w1 w2] = [ u(5) u(6) ] (t=0) [0 1]
+        
+        ! equations of motion for driver and driven oscillators:
         associate( x => u(1), v => u(2), y => u(3:4), w => u(5:6) )
         dudt(1) = v
         dudt(2) = - omega2 * x
@@ -94,7 +102,7 @@ end subroutine gl10
 
 ! integrate equations of motion for a given amount of time
 function mu(p, q)
-	real p, q, mu, u(6); integer i
+	real p, q, mu(2), u(6); complex z; integer i
 	
 	! start from a given position at rest
 	u = [1.0, 0.0, 1.0, 0.0, 0.0, 1.0]
@@ -105,7 +113,7 @@ function mu(p, q)
 	end do
 	
 	! return Floquet exponent
-	mu = acosh((u(3)+u(6))/2.0)/T
+    z = acosh(complex(u(3)+u(6),0.0)/2.0)/T; mu = [real(z),imag(z)]
 end function
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
