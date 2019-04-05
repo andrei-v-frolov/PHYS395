@@ -1,5 +1,5 @@
 ! FFTW demo, compile with
-! gfortran -O3 -fdefault-real-8 -I/opt/local/include bvp-2d.f90 -L /opt/healpix/lib -lcfitsio -L/opt/local/lib -lfftw3
+! gfortran -O3 -fdefault-real-8 -I/opt/local/include bvp-2d.f90 -L /opt/healpix/lib -lcfitsio -L/opt/local/lib -lfftw3_threads -lfftw3
 
 program fftdemo; implicit none
 
@@ -14,10 +14,12 @@ integer*8 plan
 
 real(4) image(2,N,N)
 
-integer i, j, kx, ky
+integer i, j, kx, ky, status
 
 forall (j=1:N,i=1:N) in(i,j) = rho(i*dx - 0.15, j*dx - 0.15)
 
+call dfftw_init_threads(status)
+call dfftw_plan_with_nthreads(4)
 
 call dfftw_plan_r2r_2d(plan,N,N,in,dst,FFTW_RODFT00,FFTW_RODFT00,FFTW_ESTIMATE)
 call dfftw_execute_r2r(plan, in, dst)
@@ -28,6 +30,8 @@ forall (ky=1:N,kx=1:N) dst(kx,ky) = -dst(kx,ky)/((kx*dk)**2 + (ky*dk)**2)	! inve
 call dfftw_plan_r2r_2d(plan,N,N,dst,out,FFTW_RODFT00,FFTW_RODFT00,FFTW_ESTIMATE)
 call dfftw_execute_r2r(plan, dst, out)
 call dfftw_destroy_plan(plan)
+
+call dfftw_cleanup_threads()
 
 image(1,:,:) = out/4/(N+1)**2
 image(2,:,:) = in
