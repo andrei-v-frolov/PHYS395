@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # Fibonacci numbers using recursion
 
-def fibonicci(a,b):
+def fibonacci(a,b):
 	c = a+b; print(c)
-	fibonicci(b,c)
+	fibonacci(b,c)
 
-fibonicci(0,1)
+fibonacci(0,1)
