@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Compute orthogonal polynomials by recursion
+# compute orthogonal polynomials by recursion
 
 import numpy as np
 
