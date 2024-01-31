@@ -40,7 +40,7 @@ for i in range(0,n):
 	y += w[i]*f[i]*b
 	A += w[i]*np.outer(b,b)
 
-# solve bor best fit coefficients
+# solve for best fit coefficients
 c = solve(A,y)
 
 #######################################################################
