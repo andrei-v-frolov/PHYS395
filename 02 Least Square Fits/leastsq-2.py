@@ -25,15 +25,16 @@ assert columns >= 2, ("Expecting at least 2 columns, got %i" % columns)
 # parsed data to be fitted
 x = data[:,0]; f = data[:,1]
 
-# optional weighting column
-w = 1.0/data[:,2]**2 if columns > 2 else np.ones(n)
-
 # basis functions used to fit the data
 B = legvander(x,4)
-A = np.matmul(B.transpose(),B)
-y = np.matmul(B.transpose(),f)
 
-# solve bor best fit coefficients
+# optional weighting column
+C = B.T/data[:,2]**2 if columns > 2 else B.T
+
+# solve for best fit coefficients
+A = np.matmul(C,B)
+y = np.matmul(C,f)
+
 c = solve(A,y)
 
 #######################################################################
