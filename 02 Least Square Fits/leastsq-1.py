@@ -36,7 +36,7 @@ A = np.zeros([3,3]); y = np.zeros(3)
 
 # accumulate least square fit matrices
 for i in range(0,n):
-	b = basis(data[i,0])
+	b = basis(x[i])
 	y += w[i]*f[i]*b
 	A += w[i]*np.outer(b,b)
 
