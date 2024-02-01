@@ -48,7 +48,7 @@ c = solve(A,y)
 import matplotlib.pyplot as plt
 
 # compute best fit
-y = np.array([np.dot(c,basis(x[i])) for i in range(0,n)])
+y = np.fromiter((np.dot(c,basis(x[i])) for i in range(0,n)), dtype=float)
 
 # plot residual
 plt.plot(x,f,'b-')
