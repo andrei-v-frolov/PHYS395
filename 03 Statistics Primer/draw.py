@@ -28,6 +28,7 @@ for p in argv[2:]:
 #######################################################################
 
 import numpy as np
+from erfinv import erfinv
 from numpy.random import seed, rand, uniform, normal
 
 # seed random sequence
@@ -48,6 +49,8 @@ match pdf:
 	case "chi2":
 		x = np.sum(normal(size=[n,dof])**2, 1)
 	# shaping uniform PDF
+	case "erfinv":
+		x = np.sqrt(2.0) * np.vectorize(erfinv)(2.0*rand(n)-1.0)
 	case "box-muller":
 		u = rand(n); v = rand(n)
 		x = np.sqrt(-2.0*np.log(u)) * np.cos(2.0*np.pi*v)
