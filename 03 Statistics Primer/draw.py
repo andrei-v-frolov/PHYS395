@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # draw a specified number of IID samples from a distribution
-# run as: python draw.py PDF [dof:k] [samples:n] [seed:x]
+# run as: python draw.py [from:pdf] [dof:k] [samples:n] [seed:x]
 
 #######################################################################
 
@@ -9,13 +9,11 @@ from sys import argv
 # default argument values
 pdf = "default"; initial = None; n = 32; dof = 7
 
-# select distribution (if specified)
-if len(argv) > 1:
-	pdf = argv[1]
-
-# parse parameters (if supplied)
-for p in argv[2:]:
+# parse command line arguments (if supplied)
+for p in argv[1:]:
 	match tuple(p.split(":")):
+		case ("from",s):
+			pdf = s
 		case ("dof",s):
 			dof = int(s)
 		case ("samples",s):
