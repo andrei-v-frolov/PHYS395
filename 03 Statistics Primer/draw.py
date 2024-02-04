@@ -47,6 +47,8 @@ match pdf:
 	case "chi2":
 		x = np.sum(normal(size=[n,dof])**2, 1)
 	# shaping uniform PDF
+	case "cauchy":
+		x = np.tan(np.pi*(rand(n)-0.5))
 	case "erfinv":
 		x = np.sqrt(2.0) * np.vectorize(erfinv)(2.0*rand(n)-1.0)
 	case "box-muller":
