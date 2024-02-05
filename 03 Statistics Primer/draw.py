@@ -7,7 +7,7 @@
 from sys import argv
 
 # default argument values
-pdf = "default"; initial = None; n = 32; dof = 7
+pdf = "default"; initial = None; n = 1024; dof = 7
 
 # parse command line arguments (if supplied)
 for p in argv[1:]:
