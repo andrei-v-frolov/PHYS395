@@ -15,6 +15,6 @@ C_ERF2 = [-0.000200214257, 0.000100950558, 0.00134934322, -0.00367342844, 0.0057
 
 # inverse error function approximation, good to single precision
 def erfinv(x):
-	w = log((1.0-x)*(1.0+x))
+	w = -log((1.0-x)*(1.0+x))
 	p = horner(C_ERF1,w-2.5) if w < 5.0 else horner(C_ERF2,sqrt(w)-3.0)
 	return p*x
