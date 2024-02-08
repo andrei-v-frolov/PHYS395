@@ -8,14 +8,17 @@ from sys import stdin
 
 # numerical libraries
 import numpy as np
+from erfinv import erfinv
+from scipy.stats import rankdata
 
 #######################################################################
 
 # read in data from stdin
 data = np.loadtxt(stdin)
+n, columns = data.shape
 
 # sanity check on data format
-assert len(data.shape) > 1, "Expecting at least two columns of data..."
+assert columns > 1, "Expecting at least two columns of data..."
 
 #######################################################################
 
@@ -25,7 +28,15 @@ x = data[:,0]	# Apple
 y = data[:,11]	# Starbucks
 z = data[:,8]	# Netflix
 
-t = np.linspace(0.0, 1.0, len(data))
+t = np.linspace(0.0, 1.0, n)
+
+#######################################################################
+
+# equalize or normalize the univariate distributions
+#x = (rankdata(x)-0.5)/n; x = np.sqrt(2.0) * np.vectorize(erfinv)(2.0*x-1.0)
+#y = (rankdata(y)-0.5)/n; y = np.sqrt(2.0) * np.vectorize(erfinv)(2.0*y-1.0)
+
+#######################################################################
 
 # scatter plot, with (optional) color coding
 #plt.scatter(x, y, c=t, cmap='plasma', marker=".")
