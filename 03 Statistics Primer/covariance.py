@@ -22,8 +22,7 @@ n,columns = data.shape
 assert columns >= 2, ("Expecting at least 2 columns, got %i" % columns)
 
 # subtract average from the data (aka de-mean)
-for k in range(0,columns):
-	data[:,k] -= np.sum(data[:,k])/n
+avg = np.sum(data,0)/n; data -= avg
 
 # initialize covariance accumulator
 C = np.zeros([columns,columns])
@@ -46,7 +45,7 @@ L = cholesky(C); X = normal(size=[n,columns]) @ L.T
 
 # output them to stdout
 for i in range(0,n):
-	print(*X[i,:])
+	print(*(X[i,:]+avg))
 
 #######################################################################
 
