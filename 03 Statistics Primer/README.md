@@ -23,4 +23,5 @@
 ### Random Processes
 
 - `walk.py` - stochastic processes (aka random walk) demo
+- `mcmc-1.py` - MCMC sampler using Metropolis-Hastings algorithm
 
