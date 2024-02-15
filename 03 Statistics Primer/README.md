@@ -22,3 +22,5 @@
 
 ### Random Processes
 
+- `walk.py` - stochastic processes (aka random walk) demo
+
