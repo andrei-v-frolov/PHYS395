@@ -16,9 +16,10 @@ x = uniform(-15.0, 15.0, size=chains)
 def likelihood(x):
 	return np.exp(-x*x/2.0)
 
-# random step size (adjust for )
+# random step size (adjust for acceptance rate ~ 0.5)
 sigma = 0.3
 
+# store chain history (you might want to downsample)
 history = np.zeros([n,chains])
 
 for i in range(0,n):
