@@ -27,4 +27,5 @@ import matplotlib.pyplot as plt
 
 plt.plot(x, "r-", alpha=0.03)
 plt.plot(x[:,0], "b-")
+plt.xlim([0,n])
 plt.show()

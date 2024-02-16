@@ -35,4 +35,5 @@ import matplotlib.pyplot as plt
 
 plt.plot(history, "r-", alpha=0.03)
 plt.plot(history[:,0], "b-")
+plt.xlim([0,n])
 plt.show()
