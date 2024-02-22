@@ -24,4 +24,5 @@
 
 - `walk.py` - stochastic processes (aka random walk) demo
 - `mcmc-?.py` - MCMC samplers using Metropolis-Hastings algorithm
+- `field-?.py` - Gaussian random field generators using FFTs
 
