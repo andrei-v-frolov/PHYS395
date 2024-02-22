@@ -39,4 +39,6 @@ plt.plot(x,f,'b-')
 plt.plot(x,np.roll(g,-1),'k-')
 plt.plot(x,np.roll(q,n//2),'r-')
 
+plt.xlim([-l,l])
+
 plt.show()
