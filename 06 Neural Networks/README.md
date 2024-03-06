@@ -6,6 +6,6 @@
 - `autograd.py` - compute graph and back-propagation demo
 - `training.py` - network definition and training template
 
-### Network Examples
+### Worked Examples
 
-- `digits` - [MNIST database of handwritten digits](http://yann.lecun.com/exdb/mnist/)
+- `digits` - recognizing [handwritten digits](http://yann.lecun.com/exdb/mnist/)
