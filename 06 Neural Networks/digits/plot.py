@@ -13,12 +13,12 @@ matplotlib.use('macosx' if file is None else 'PDF')
 from pylab import *
 
 # load mnist test data
-test = idx.open('t10k-images-idx3-ubyte.gz')
+test = idx.open('data/t10k-images-idx3-ubyte.gz')
 image = idx.grid(test, 100, 100)
 #image = idx.grid(test, 125, 80)
 #image = idx.grid(test, 200, 50)
 
-#test = idx.open('train-images-idx3-ubyte.gz')
+#test = idx.open('data/train-images-idx3-ubyte.gz')
 #image = idx.grid(test, 300, 200)
 
 # create the figure

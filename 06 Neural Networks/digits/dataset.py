@@ -12,8 +12,8 @@ import numpy as np
 # MNIST handwritten digits dataset
 class HandwrittenDigitsDataset(Dataset):
 	def __init__(self, set):
-		self.image = torch.from_numpy(idx.open(set + '-images-idx3-ubyte.gz')/np.single(255.0))
-		self.label = torch.from_numpy(idx.open(set + '-labels-idx1-ubyte.gz'))
+		self.image = torch.from_numpy(idx.open('data/' + set + '-images-idx3-ubyte.gz')/np.single(255.0))
+		self.label = torch.from_numpy(idx.open('data/' + set + '-labels-idx1-ubyte.gz'))
 		assert self.image.shape[0] == self.label.shape[0], "Dataset size mismatch..."
 
 	def __len__(self):

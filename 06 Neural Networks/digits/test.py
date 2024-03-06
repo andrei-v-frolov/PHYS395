@@ -24,7 +24,7 @@ model.eval()
 print(model)
 
 # success bitmap
-data = idx.open('t10k-images-idx3-ubyte.gz')
+data = idx.open('data/t10k-images-idx3-ubyte.gz')
 success = torch.zeros((len(test_data),28,28))
 
 with torch.no_grad():
