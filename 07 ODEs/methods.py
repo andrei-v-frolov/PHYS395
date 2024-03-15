@@ -71,7 +71,7 @@ def ieuler(state):
 def midpoint(state):
 	return state + f(state + f(state)*dt/2.0)*dt
 
-# implicit midpoint (2nd order)
+# implicit midpoint (aka GL2)
 def imidpoint(state):
 	return root(lambda x: x - state - f((x+state)/2.0)*dt, state).x
 
