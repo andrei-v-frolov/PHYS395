@@ -47,8 +47,13 @@ def midpoint(state):
 def imidpoint(state):
 	return root(lambda x: x - state - f((x+state)/2.0)*dt, state).x
 
-# to be continued...
-...
+# 4-th order Runge-Kutta method
+def rk4(state):
+	k1 = f(state)
+	k2 = f(state+k1*dt/2.0)
+	k3 = f(state+k2*dt/2.0)
+	k4 = f(state+k3*dt)
+	return state + (k1+2.0*k2+2.0*k3+k4)*dt/6.0
 
 #######################################################################
 # operator splitting methods for separable Hamiltonian (hard-coded EoM)
@@ -85,7 +90,7 @@ t = 0.0; history = np.zeros([dim+2,n])
 
 # evolve dynamical system with specified method
 for i in range(0,n):
-	t += dt; state = midpoint(state)
+	t += dt; state = rk4(state)
 	history[:,i] = [*state, t, E(state)-E0]
 
 #######################################################################
