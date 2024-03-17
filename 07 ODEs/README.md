@@ -11,3 +11,4 @@
 - `ballistic.py` - interactive demo of ballistic motion
 - `phase.py` - phase space portrait of physical pendulum
 - `pendulum.py` - animated physical pendulum evolution
+- `resonance.py` - animated non-linear resonance demo
