@@ -148,7 +148,7 @@ def si(n, state, dt):
 # Gauss-Legendre methods; symplectic with arbitrary Hamiltonian, A-stable
 #######################################################################
 
-...
+from gl import gl2, gl4, gl6, gl8, gl10, gl12
 
 #######################################################################
 
