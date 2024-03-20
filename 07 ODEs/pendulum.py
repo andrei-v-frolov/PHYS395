@@ -31,6 +31,9 @@ fig = plt.figure(); ax = fig.gca()
 # circle traced by pendulum
 ax.add_patch(plt.Circle((0, 0), 1.0, color='r', fill=False))
 
+# monitor energy violation
+#deltaE = ax.text(0.0, 0.8, '', horizontalalignment='center', fontfamily='monospace')
+
 # pendulum drawing (nothing fancy)
 pendulum, = plt.plot([0,sin(state[0])], [0,-cos(state[0])], "o-", linewidth=7, ms=15)
 
@@ -47,6 +50,7 @@ def animate(i):
 	global state
 	state = gl10(f, state, 6.699975664370446/200); x = state[0]
 	pendulum.set_data([0,sin(x)], [0,-cos(x)])
+	#deltaE.set_text('δE = %+0.1E' % (E(state)-E0))
 
 animation = animation.FuncAnimation(fig, animate, frames=1000, interval=1000.0/60)
 #animation.save('pendulum.mp4')
