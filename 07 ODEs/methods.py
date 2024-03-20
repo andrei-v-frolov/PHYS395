@@ -88,14 +88,14 @@ def rk4(state):
 #######################################################################
 
 # 1st order Hamiltonian split (oscillator)
-def si1(state):
+def si1(state, dt):
 	x,v = state
 	x += v*dt
 	v += -x**3*dt
 	return np.array([x,v])
 
 # 2nd order Hamiltonian split (oscillator)
-def si2(state):
+def si2(state, dt):
 	x,v = state
 	x += v*dt/2.0
 	v += -x**3*dt
@@ -104,7 +104,7 @@ def si2(state):
 
 '''
 # 2nd order Hamiltonian split (Kepler problem)
-def si2(state):
+def si2(state, dt):
 	x,y,vx,vy = state
 	x += vx*dt/2.0
 	y += vy*dt/2.0
@@ -116,8 +116,33 @@ def si2(state):
 	return np.array([x,y,vx,vy])
 '''
 
-# to be continued...
-...
+# Yoshida 6-th order scheme timesteps
+W6 = np.array([
+	 1.31518632068391121888424972823886251E0,
+	-1.17767998417887100694641568096431573E0,
+	 0.235573213359358133684793182978534602E0,
+	 0.784513610477557263819497633866349876E0
+])
+
+# 6th order symplectic integrator
+def si6(state, dt):
+	for i in range(-3,4):
+		state = si2(state, W6[abs(i)]*dt)
+	return state
+
+# n-th order symplectic integrator (even n only)
+def si(n, state, dt):
+	match n:
+		case 1: return si1(state, dt)
+		case 2: return si2(state, dt)
+		case 6: return si6(state, dt)
+		case k:
+			gamma = 1.0/(k-1.0)
+			alpha = 1.0/(2.0 - 2.0**gamma)
+			state = si(k-2, state, alpha*dt)
+			state = si(k-2, state, (1.0-2.0*alpha)*dt)
+			state = si(k-2, state, alpha*dt)
+			return state
 
 #######################################################################
 # Gauss-Legendre methods; symplectic with arbitrary Hamiltonian, A-stable
