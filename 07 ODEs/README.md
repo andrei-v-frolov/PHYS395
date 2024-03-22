@@ -13,3 +13,4 @@
 - `pendulum-1.py` - animated physical pendulum evolution
 - `resonance.py` - animated non-linear resonance demo
 - `floquet-?.py` - parametric resonance and Floquet exponents
+- `duffing-?.py` - non-linear resonance in Duffing oscillator
