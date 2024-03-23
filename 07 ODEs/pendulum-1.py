@@ -24,6 +24,26 @@ state = np.array([1.0,0.0]); E0 = E(state)
 
 #######################################################################
 
+'''
+from scipy.integrate import solve_ivp
+
+# stopping condition (half period completed)
+def stop(t,state):
+	x,v = state
+	return v
+
+# stopping condition attributes
+stop.terminal = True
+stop.direction = 1.0
+
+# edit f(y) -> f(t,y) to use this solver
+soln = solve_ivp(f, [0.0,6.0], state, events=stop, rtol=1e-16, atol=1e-16)
+
+period = 2.0*soln.t[-1]; print(period); exit()
+'''
+
+#######################################################################
+
 import matplotlib.pyplot as plt
 
 fig = plt.figure(); ax = fig.gca()
