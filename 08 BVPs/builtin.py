@@ -18,7 +18,7 @@ def f(t, state):
 
 # boundary conditions
 def bc(a,b):
-	return [a[0],b[1]-nu]
+	return [a[0],b[0]-nu]
 
 # built-in solver
 x = np.linspace(0.0, 100.0, 1024)
