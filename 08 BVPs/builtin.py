@@ -30,9 +30,7 @@ soln = solve_bvp(f, bc, x, y, max_nodes=16*1024)
 import matplotlib.pyplot as plt
 
 # plot sampled solution
-plt.plot(soln.x, soln.y[0])
-#plt.plot(soln.x, soln.y[0]-np.tanh(soln.x/np.sqrt(2.0)), 'r')
-#plt.xlim([0.0,10.0])
-#plt.ylim([-1e-7,1e-7])
+#plt.plot(soln.x, soln.y[0])
+plt.plot(soln.x, soln.y[0]-np.tanh(soln.x/np.sqrt(2.0)), 'r')
 
 plt.show()
