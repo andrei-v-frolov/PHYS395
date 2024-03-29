@@ -11,6 +11,7 @@
 - `ballistic.py` - interactive demo of ballistic motion
 - `phase.py` - phase space portrait of physical pendulum
 - `pendulum-1.py` - animated physical pendulum evolution
+- `pendulum-2.py` - animated double pendulum evolution
 - `resonance.py` - animated non-linear resonance demo
 - `floquet-?.py` - parametric resonance and Floquet exponents
 - `duffing-?.py` - non-linear resonance in Duffing oscillator
