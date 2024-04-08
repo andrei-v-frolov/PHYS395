@@ -9,5 +9,4 @@
 ### Eigenvalue problems
 
 - `rayleigh.py` - Rayleigh iteration solver for eigenvalue problem
-- `quartic.py` - energy eigenstates of quantum anharmonic oscillator
-- `dwell.py` - energy eigenstates of quantum double well potential
+- `quantum.py` - energy eigenstates of quantum anharmonic oscillator
