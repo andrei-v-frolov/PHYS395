@@ -10,7 +10,7 @@ from numpy.random import rand, choice
 #######################################################################
 
 # grid resolution
-n = 101
+n = 201
 
 # site parity mask
 X,Y = np.meshgrid(range(n),range(n)); parity = X+Y
@@ -24,7 +24,7 @@ sigma = choice([-1.0,1.0], (n,n))
 #######################################################################
 
 # coupling constants
-J = 1.0; mu = 0.0; beta = 1.0
+J = 1.0; mu = 0.0; beta = 0.5
 
 # nearest neighbour coupling stencil
 stencil = np.array([[0,1,0],[1,0,1],[0,1,0]])
@@ -50,6 +50,37 @@ fig = plt.figure(); ax = fig.gca()
 spins = plt.imshow(sigma, origin='lower', vmin=-1.0, vmax=1.0, cmap=crt)
 
 #######################################################################
+
+# interactive controls
+from matplotlib.widgets import Slider
+
+# make room for widgets
+fig.subplots_adjust(bottom=0.22)
+
+# user interface elements
+beta_slider = Slider(
+    ax=fig.add_axes([0.1, 0.07, 0.8, 0.03]),
+    valmin=0.0, valmax=1.0, valinit=beta,
+    label='β'
+)
+
+mu_slider = Slider(
+    ax=fig.add_axes([0.1, 0.02, 0.8, 0.03]),
+    valmin=-1.0, valmax=1.0, valinit=mu,
+    label='μ'
+)
+
+# update simulation parameters
+def update(value):
+	global beta, mu
+	beta = beta_slider.val; mu = mu_slider.val
+
+# register update handler
+beta_slider.on_changed(update)
+mu_slider.on_changed(update)
+
+#######################################################################
+
 import matplotlib.animation as animation
 
 # called to advance animation to next frame
