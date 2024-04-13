@@ -43,11 +43,17 @@ def step(i):
 
 import matplotlib.pyplot as plt
 from matplotlib import colors
-
-crt = colors.LinearSegmentedColormap.from_list("CRT", ["black", "greenyellow"])
+from matplotlib.lines import Line2D
 
 fig = plt.figure(); ax = fig.gca()
+
+# spin orientation map
+crt = colors.LinearSegmentedColormap.from_list("CRT", ['black', 'greenyellow'])
 spins = plt.imshow(sigma, origin='lower', vmin=-1.0, vmax=1.0, cmap=crt)
+
+# total magnetization meter
+gauge = colors.LinearSegmentedColormap.from_list("magnet", ['blue', 'darkgreen', 'red'])
+magnet = ax.add_line(Line2D([1.03*n,1.03*n], [n/2,n/2], color=gauge(0), linewidth=7, solid_capstyle='butt', clip_on=False, zorder=3))
 
 #######################################################################
 
@@ -86,6 +92,9 @@ import matplotlib.animation as animation
 # called to advance animation to next frame
 def animate(i):
 	spins.set_data(step(i))
+	M = (1.0 + np.sum(sigma)/n**2)/2.0
+	magnet.set_data([1.03*n,1.03*n], [n/2,M*n])
+	magnet.set_color(gauge(M))
 
 animation = animation.FuncAnimation(fig, animate, frames=1000, interval=1000.0/60)
 #animation.save('ising.mp4')
