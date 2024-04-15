@@ -45,23 +45,51 @@ def flipped(state):
 #######################################################################
 
 # compute an IC scanline in a batch
-def batch(theta):
+def batch(value, x1=x):
 	# vectorized initial conditions
-	state = np.concatenate((x,np.full(n,theta),np.zeros(2*n))); T = -np.ones(n)
+	t = np.zeros_like(x1)
+	x2 = np.broadcast_to(value,x1.shape)
+	state = np.concatenate((x1,x2,t,t))
+
+	# record the time of first flip
 	for i in range(0,steps):
 		state = gl12(f, state, dt)
-		T = np.where((T < 0.0) & flipped(state), (i+1)*dt, T)
-	return T
+		t = np.where((t <= 0.0) & flipped(state), (i+1)*dt, t)
+	return t
 
 #######################################################################
 
 from time import perf_counter as now
 from joblib import Parallel, delayed
 
-t1 = now(); print("Scanning IC: ", end='')
+t1 = now(); print("Scanning %ix%i IC grid:" % (n,n))
 T = np.array(Parallel(n_jobs=jobs)(delayed(batch)(theta) for theta in y))
 t2 = now(); print(t2-t1)
 
+#######################################################################
+
+# rescan ICs with enough energy to flip
+X,Y = np.meshgrid(x,y); steps *= 10
+mask = (T <= 0.0) & (3.0*np.cos(X) + np.cos(Y) < 2.0)
+
+# split the workload into batches
+x1 = np.array_split(np.extract(mask,X),jobs)
+x2 = np.array_split(np.extract(mask,Y),jobs)
+
+t1 = now(); print("Rescanning %i pixels:" % np.sum(mask))
+details = np.concatenate(Parallel(n_jobs=jobs)(delayed(batch)(i,j) for i,j in zip(x2,x1)))
+t2 = now(); print(t2-t1)
+
+# put them back in place
+np.place(T, mask, details)
+
+#######################################################################
+'''
+# fast decimator using CIC filter (for oversampled rendering)
+# https://en.wikipedia.org/wiki/Cascaded_integrator–comb_filter
+T = np.diff(np.cumsum(T, axis=0)[::4,:], axis=0)/4.0
+T = np.diff(np.cumsum(T, axis=1)[:,::4], axis=1)/4.0
+'''
 #######################################################################
 
 import matplotlib.pyplot as plt
@@ -69,6 +97,6 @@ import matplotlib.cm as cm
 
 cmap = cm.turbo; cmap.set_bad('lightgray')
 
-plt.imshow(T, origin='lower', extent=[x[0],x[-1],y[0],y[-1]], cmap=cmap, norm='log', aspect='equal', interpolation='none')
+plt.imshow(T, origin='lower', extent=[x[0],x[-1],y[0],y[-1]], cmap=cmap, vmin=dt, norm='log', aspect='equal', interpolation='none')
 plt.colorbar()
 plt.show()
