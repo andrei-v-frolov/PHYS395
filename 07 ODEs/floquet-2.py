@@ -68,6 +68,6 @@ import matplotlib.cm as cm
 
 cmap = cm.afmhot; cmap.set_under('lightgray')
 
-plt.imshow(floquet-(floquet==0.0), origin='lower', extent=[q[0],q[-1],a[0],a[-1]], vmin=0.0, cmap=cmap, norm='linear', aspect='equal', interpolation='none')
+plt.imshow(floquet-(floquet==0.0), origin='lower', extent=[q[0],q[-1],a[0],a[-1]], vmin=0.0, cmap=cmap, norm='linear', aspect='equal', interpolation=None)
 plt.colorbar()
 plt.show()

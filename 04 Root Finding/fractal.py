@@ -39,7 +39,7 @@ q = np.diff(np.cumsum(q, axis=1)[:,::4], axis=1)/4.0
 
 import matplotlib.pyplot as plt
 
-plt.imshow(q, origin='lower', extent=[-l,l,-l,l], interpolation='none', norm='log', cmap='twilight')
+plt.imshow(q, origin='lower', extent=[-l,l,-l,l], cmap='twilight', norm='log', interpolation=None)
 plt.colorbar()
 
 plt.show()

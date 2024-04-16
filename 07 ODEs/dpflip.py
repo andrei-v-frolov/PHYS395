@@ -97,6 +97,6 @@ import matplotlib.cm as cm
 
 cmap = cm.turbo; cmap.set_bad('lightgray')
 
-plt.imshow(T, origin='lower', extent=[x[0],x[-1],y[0],y[-1]], cmap=cmap, vmin=dt, norm='log', aspect='equal', interpolation='none')
+plt.imshow(T, origin='lower', extent=[x[0],x[-1],y[0],y[-1]], cmap=cmap, vmin=dt, norm='log', aspect='equal', interpolation=None)
 plt.colorbar()
 plt.show()

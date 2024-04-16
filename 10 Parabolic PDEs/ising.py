@@ -49,7 +49,7 @@ fig = plt.figure(); ax = fig.gca()
 
 # spin orientation map
 crt = colors.LinearSegmentedColormap.from_list("CRT", ['black', 'greenyellow'])
-spins = plt.imshow(sigma, origin='lower', vmin=-1.0, vmax=1.0, cmap=crt, interpolation='none')
+spins = plt.imshow(sigma, origin='lower', vmin=-1.0, vmax=1.0, cmap=crt, interpolation=None)
 
 # total magnetization meter
 gauge = colors.LinearSegmentedColormap.from_list("magnet", ['blue', 'darkgreen', 'red'])
