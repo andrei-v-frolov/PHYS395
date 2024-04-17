@@ -12,7 +12,8 @@ from gl import gl12
 n = 64; dt = np.pi/32; steps = 320; jobs = 8
 
 # parameter range to scan
-x = np.linspace(-3.14,3.14,n); y = x
+a = np.pi * (1.0 - 1.0/n)
+x = np.linspace(-a,a,n); y = x
 
 #######################################################################
 
@@ -66,6 +67,9 @@ t1 = now(); print("Scanning %ix%i IC grid:" % (n,n))
 T = np.array(Parallel(n_jobs=jobs)(delayed(batch)(theta) for theta in y))
 t2 = now(); print(t2-t1)
 
+# checkpoint storing data
+np.save('dpflip.npy', T)
+
 #######################################################################
 
 # rescan ICs with enough energy to flip
@@ -82,6 +86,9 @@ t2 = now(); print(t2-t1)
 
 # put them back in place
 np.place(T, mask, details)
+
+# checkpoint storing data
+np.save('dpflip.npy', T)
 
 #######################################################################
 '''
