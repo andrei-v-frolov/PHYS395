@@ -24,7 +24,7 @@ image = idx.grid(test, 100, 100)
 # create the figure
 figure(figsize=(10,8), frameon=False); gradient = ["white", "black"]
 c = matplotlib.colors.LinearSegmentedColormap.from_list("difference", gradient)
-imshow(image, origin='upper', cmap=c, vmin=0.0, vmax=255.0, interpolation=None)
+imshow(image, origin='upper', cmap=c, vmin=0.0, vmax=255.0)
 
 tick_params(left=False, right=False, labelleft=False, labelbottom = False, bottom=False)
 
