@@ -50,12 +50,12 @@ def batch(value, x1=x):
 	# vectorized initial conditions
 	t = np.zeros_like(x1)
 	x2 = np.broadcast_to(value,x1.shape)
-	state = np.concatenate((x1,x2,t,t))
+	state = np.concatenate((x1,x2,t,t)); t = -1.0
 
 	# record the time of first flip
 	for i in range(0,steps):
 		state = gl12(f, state, dt)
-		t = np.where((t <= 0.0) & flipped(state), (i+1)*dt, t)
+		t = np.where((t < 0.0) & flipped(state), (i+1)*dt, t)
 	return t
 
 #######################################################################
@@ -74,7 +74,7 @@ np.save('dpflip.npy', T)
 
 # rescan ICs with enough energy to flip
 X,Y = np.meshgrid(x,y); steps *= 10
-mask = (T <= 0.0) & (3.0*np.cos(X) + np.cos(Y) < 2.0)
+mask = (T < 0.0) & (3.0*np.cos(X) + np.cos(Y) < 2.0)
 
 # split the workload into batches
 x1 = np.array_split(np.extract(mask,X),jobs)
@@ -92,10 +92,13 @@ np.save('dpflip.npy', T)
 
 #######################################################################
 '''
-# fast decimator using CIC filter (for oversampled rendering)
-# https://en.wikipedia.org/wiki/Cascaded_integrator–comb_filter
-T = np.diff(np.cumsum(T, axis=0)[::4,:], axis=0)/4.0
-T = np.diff(np.cumsum(T, axis=1)[:,::4], axis=1)/4.0
+from scipy.ndimage import median_filter as median
+
+# load checkpoint data
+#T = np.load('dpflip.npy')
+
+# downsample using median filter
+T = median(T, 3)[1::3,1::3]
 '''
 #######################################################################
 
