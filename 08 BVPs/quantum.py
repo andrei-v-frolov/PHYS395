@@ -47,16 +47,26 @@ E,W = eigh(H)
 # energy eigenstates of an anharmonic oscillator
 psi = np.matmul(B,W)
 
+# canonical sign choice for eigenstates
+for i in range(n):
+	psi[:,i] *= np.sign(np.dot(1.0+x,psi[:,i]))
+
 ###############################################################################
 
 import matplotlib.pyplot as plt
 
-# plot eigenstates and eigenvalues side-to-side
-fig, ax = plt.subplots(1, 2, sharey=True); state = []
+# plot eigenstates and eigenvalues side-by-side
+fig, ax = plt.subplots(1, 2, sharey=True)
 
-# plot PDF of energy eigenstates
+# what to plot for energy level
+plot = 'probability'; phase = np.zeros(m); state = []
+
+def level(k):
+	return (psi[:,k]**2 if (plot == 'probability') else psi[:,k]*cos(phase[k])/2.0) + E[k]
+
+# plot energy eigenstates
 for k in range(m):
-	plot, = ax[0].plot(x, E[k]+psi[:,k]**2, color='black'); state.append(plot)
+	lvl, = ax[0].plot(x, level(k), color='black'); state.append(lvl)
 
 # plot oscillator potential
 potential, = ax[0].plot(x, V, color='red', linewidth=3)
@@ -71,7 +81,7 @@ plt.tight_layout()
 #######################################################################
 
 # interactive controls
-from matplotlib.widgets import Slider
+from matplotlib.widgets import Slider, RadioButtons
 
 # make room for widgets
 fig.subplots_adjust(bottom=0.22)
@@ -89,21 +99,58 @@ nu_slider = Slider(
     label='λ'
 )
 
+choice = RadioButtons(
+	fig.add_axes([0.65, 0.83, 0.22, 0.12]),
+	('probability','wavefunction','animation')
+)
+
+# change display mode
+def change(value):
+	global plot; plot = choice.value_selected
+	if (plot != 'animation'): phase.fill(0.0)
+	if (plot == 'wavefunction'):
+		# reset to canonical sign
+		psi = np.expand_dims(1.0+x,1)
+	update(value)
+
 # update simulation parameters
 def update(value):
+	global mu, nu, V, H, E, W, psi
+	# update model parameters
 	mu = mu_slider.val; nu = nu_slider.val
 	H = P2/2.0 + mu*X2/2.0 + nu*np.matmul(X2,X2)/4.0
-	E,W = eigh(H); psi = np.matmul(B,W)
 	V = mu*x*x/2.0 + nu*x**4/4.0
+	# recompute eigenfunctions inheriting sign
+	E,W = eigh(H); phi = np.matmul(B,W)
+	for i in range(n):
+		psi[:,i] = np.sign(np.dot(psi[:,i],phi[:,i]))*phi[:,i]
+	# update plot data
 	energy.set_data(range(m), E[:m])
 	potential.set_data(x, V)
-	for k in range(m):
-		state[k].set_data(x, E[k]+psi[:,k]**2)
+	for k in range(m): state[k].set_data(x, level(k))
 	ax[0].set_ylim([min(np.min(V), E[0])-0.5, E[m]])
 
 # register update handler
 mu_slider.on_changed(update)
 nu_slider.on_changed(update)
+choice.on_clicked(change)
 
 update(None)
+
+#######################################################################
+
+import matplotlib.animation as animation
+
+# evolution time step
+dt = 4.0*np.pi/1000
+
+# called to advance animation to next frame
+def animate(i):
+	if (plot != 'animation'): return
+	global phase; phase += E[:m]*dt
+	for k in range(m):
+		state[k].set_data(x, level(k))
+
+animation = animation.FuncAnimation(fig, animate, frames=1000, interval=1000.0/60)
+#animation.save('quantum.mp4')
 plt.show()
