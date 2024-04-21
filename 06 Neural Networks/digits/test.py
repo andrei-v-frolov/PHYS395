@@ -46,8 +46,8 @@ success = idx.grid(success, 125, 80)
 figure(figsize=(10,8), frameon=False)
 s = matplotlib.colors.LinearSegmentedColormap.from_list("success", ["red", "white"])
 d = matplotlib.colors.LinearSegmentedColormap.from_list("success", ["#00000000", "black"])
-imshow(success, origin='upper', cmap=s, vmin=0.0, vmax=1.0)
-imshow(image, origin='upper', cmap=d, vmin=0.0, vmax=255.0)
+imshow(success, origin='upper', cmap=s, vmin=0.0, vmax=1.0, interpolation='none')
+imshow(image, origin='upper', cmap=d, vmin=0.0, vmax=255.0, interpolation='none')
 
 tick_params(left=False, right=False, labelleft=False, labelbottom = False, bottom=False)
 

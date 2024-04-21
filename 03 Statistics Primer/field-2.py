@@ -33,6 +33,6 @@ F = rfft2(f); W = rfft2(w); g = irfft2(W*F)
 
 import matplotlib.pyplot as plt
 
-plt.imshow(g, cmap='bwr', origin='lower')
+plt.imshow(g, origin='lower', cmap='bwr', interpolation='none')
 
 plt.show()

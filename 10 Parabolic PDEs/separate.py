@@ -45,7 +45,7 @@ from matplotlib import colors
 
 fig = plt.figure(); ax = fig.gca()
 crt = colors.LinearSegmentedColormap.from_list("CRT", ['black', 'greenyellow'])
-wave = plt.imshow(phi, extent=[-l,l,-l,l], vmin=-1.0, vmax=1.0, cmap=crt)
+wave = plt.imshow(phi, extent=[-l,l,-l,l], vmin=-1.0, vmax=1.0, cmap=crt, interpolation='none')
 
 #######################################################################
 import matplotlib.animation as animation

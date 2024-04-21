@@ -50,7 +50,7 @@ def step(i):
 import matplotlib.pyplot as plt
 
 fig = plt.figure(); ax = fig.gca()
-wave = plt.imshow(phi, extent=[-l,l,-l,l], vmin=-1.0, vmax=1.0, cmap='seismic')
+wave = plt.imshow(phi, extent=[-l,l,-l,l], vmin=-1.0, vmax=1.0, cmap='seismic', interpolation='none')
 
 #######################################################################
 import matplotlib.animation as animation
