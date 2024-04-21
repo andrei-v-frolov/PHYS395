@@ -13,7 +13,7 @@ from numpy.random import choice
 n = 100; l = 1.0
 
 # uniform spatial grid
-dx = 2.0*l/n; x = np.linspace(-l,l,n)
+dx = 2.0*l/(n-1); x = np.linspace(-l,l,n)
 
 # initial field profile
 phi = choice([-1.0,1.0], (n,n))

@@ -12,7 +12,7 @@ from scipy.ndimage import convolve
 n = 100; l = 1.0
 
 # uniform spatial grid
-dx = 2.0*l/n; x = np.linspace(-l,l,n)
+dx = 2.0*l/(n-1); x = np.linspace(-l,l,n)
 
 # initial field profile
 X,Y = np.meshgrid(x,x)

@@ -13,7 +13,7 @@ from scipy.linalg import solve_banded
 n = 1000; l = 5.0
 
 # uniform spatial grid
-dx = 2.0*l/n; x = np.linspace(-l, l, n)
+dx = 2.0*l/(n-1); x = np.linspace(-l,l,n)
 
 # initial wavefunction
 psi = np.exp(-(x-1.5)**2/2.0).astype(complex)

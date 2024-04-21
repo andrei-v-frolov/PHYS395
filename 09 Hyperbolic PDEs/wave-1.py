@@ -12,7 +12,7 @@ from scipy.signal import convolve
 n = 1000; l = 1.0
 
 # uniform spatial grid
-dx = 2.0*l/n; x = np.linspace(-l, l, n)
+dx = 2.0*l/(n-1); x = np.linspace(-l,l,n)
 
 # initial field profile
 phi = np.exp(-x*x*256.0)
