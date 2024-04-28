@@ -56,10 +56,10 @@
 
 ## Condensed Matter
 
-### Ising Model: <a href="../10 Parabolic PDEs/ising.py">10 Parabolic PDEs/ising.py</a> <img src="animated.png" alt="animated demo" height=16> <img src="interactive.png" alt="interactive demo" height=24>
+### Ising Model: <a href="../10 Parabolic PDEs/ising.py">10 Parabolic PDEs/ising.py</a> <img src="animated.png" alt="animated demo" height=24> <img src="interactive.png" alt="interactive demo" height=24>
 <img src="ising.png" alt="Ising model MCMC" width=842>
 
-### Phase Separation: <a href="../10 Parabolic PDEs/separate.py">10 Parabolic PDEs/separate.py</a> <img src="animated.png" alt="animated demo" height=16>
+### Phase Separation: <a href="../10 Parabolic PDEs/separate.py">10 Parabolic PDEs/separate.py</a> <img src="animated.png" alt="animated demo" height=24>
 <img src="cahn.png" alt="Phase separation in Cahn-Hilliard model" width=522>
 
 ## Image Processing
