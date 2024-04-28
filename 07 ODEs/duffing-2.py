@@ -34,7 +34,7 @@ t = 2.0*np.pi/omega; dt = t/steps
 
 # vectorized dynamical system
 def f(state):
-	x,v,t = state.reshape(3,len(state)//3)
+	x,v,t = state.reshape(3,-1)
 	return np.concatenate((v,force*np.cos(t)-alpha*v-(kappa+beta*x*x)*x,omegas))
 
 # initial state placeholder
