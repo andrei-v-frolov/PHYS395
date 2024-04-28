@@ -4,7 +4,7 @@
 #######################################################################
 
 # number of steps and realizations
-n = 1024; chains = 500; l = 1.5
+n = 1024; chains = 1000; l = 1.5
 
 import numpy as np
 from numpy.random import normal, uniform
@@ -45,11 +45,11 @@ L = likelihood(X,Y)
 fig = plt.figure()
 
 # density plot of likelihood
-plt.contourf(X,Y,L, levels=30, cmap='Reds')
+plt.contourf(X,Y,L, levels=30, cmap='Blues')
 plt.colorbar()
 
 # end state of the chains
-walkers = plt.scatter(x[0],x[1], marker=".")
+walkers = plt.scatter(x[0],x[1], marker=".", color="tab:red", s=5.0)
 
 #animation = animate(fig, lambda i: walkers.set_offsets(history[i].T), n, interval=1000/60)
 

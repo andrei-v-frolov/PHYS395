@@ -71,8 +71,8 @@ F = F/(mu*mu+F*F)**0.375
 
 # plot optimization history
 plt.plot(history[0], history[1], "r.-")
-plt.imshow(F, extent=[-l,l,-l,l], cmap='twilight')
-#plt.contourf(F, extent=[-l,l,-l,l], levels=30, cmap='twilight')
+plt.imshow(F, extent=[-l,l,-l,l], cmap='Blues')
+#plt.contourf(F, extent=[-l,l,-l,l], levels=30, cmap='Blues')
 plt.colorbar()
 
 # make sure aspect is 1:1
