@@ -2,7 +2,7 @@
 
 ## Applied Math
 
-### Newton's Fractal: [04 Root Finding/fractal.py](https://../04 Root Finding/fractal.py)
+### Newton's Fractal: <a href="../04 Root Finding/fractal.py">04 Root Finding/fractal.py</a>
 <img src="fractal.png" alt="Newton's fractal" width=712>
 
 ### Floquet Exponents: [07 ODEs/floquet-2.py](../07 ODEs/floquet-2.py)
