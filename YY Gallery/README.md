@@ -64,5 +64,5 @@
 
 ## Image Processing
 
-### Non-Local Means: <a href="../10 Parabolic PDEs/nlmean.py">10 Parabolic PDEs/nlmean.py</a>
+### Non-Local Means: <a href="../12 Computer Vision/nlmean.py">12 Computer Vision/nlmean.py</a>
 <img src="split.png" alt="Noise removal with non-local means" width=523>
