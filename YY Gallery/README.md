@@ -48,7 +48,7 @@
 ### Dipole Field Visualization: <a href="../10 Parabolic PDEs/stream.py">10 Parabolic PDEs/stream.py</a> <img src="animated.png" alt="animated demo" height=24>
 <img src="stream.png" alt="Dipole field lines via line integral convolution" width=633>
 
-### Electrostatic Field Strength: <a href="../11 Elliptic PDEs/s.py">11 Elliptic PDEs/skyline.py</a>
+### Electrostatic Field Strength: <a href="../11 Elliptic PDEs/skyline.py">11 Elliptic PDEs/skyline.py</a>
 <img src="skyline.png" alt="Electrostatic field strength between two equipotential shapes" width=872>
 
 ### Cylinder Waveguide Modes
