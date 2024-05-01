@@ -3,7 +3,7 @@
 ### Solution Methods
 
 - `diffuse.py` - solve Poisson equation using diffusion
-- `fft.py` - Poisson equation with homogeneous BCs via FFTs
+- `poisson.py` - solve Poisson equation in a grounded box using FFTs
 - `multigrid.py` - fast linear multi-grid relaxation solver
 
 ### Physics Examples
