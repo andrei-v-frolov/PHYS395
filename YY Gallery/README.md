@@ -75,5 +75,5 @@
 
 ## Neural Networks
 
-### Recognizing Hand-Written Digits:
+### Recognizing Hand-Written Digits: <a href="../06 Neural Networks/digits/README.md">06 Neural Networks/digits</a>
 <img src="digits.png" alt="Success rate of a trained neural network" width=605>
