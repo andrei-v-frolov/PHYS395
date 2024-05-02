@@ -72,3 +72,8 @@
 
 ### Non-Local Means: <a href="../12 Computer Vision/nlmean.py">12 Computer Vision/nlmean.py</a>
 <img src="nlmean.png" alt="Noise removal with non-local means" width=523>
+
+## Neural Networks
+
+### Recognizing Hand-Written Digits:
+<img src="digits.png" alt="Success rate of a trained neural network" width=605>
