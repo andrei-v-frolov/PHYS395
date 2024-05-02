@@ -26,6 +26,9 @@ phi = 3.0*np.exp(-(X*X+Y*Y)*256.0)
 # second order Laplacian stencil (isotropic)
 laplacian = np.array([[1,4,1],[4,-20,4],[1,4,1]])/(6.0*dx**2)
 
+# fancy boundary conditions (if desired)
+#mask = (X*X + (X*X+2*Y)**4/4) > 0.9
+
 #######################################################################
 
 # time step
@@ -45,6 +48,7 @@ stencil = np.array([[0,0,0],[0,2,0],[0,0,0]]) + laplacian*dt**2
 def step(i):
 	hr = i%3; up = (i+1)%3; dn = (i+2)%3
 	smp[up] = convolve(smp[hr], stencil, mode='wrap') - smp[dn]
+	#smp[up] = np.where(mask, smp[hr], convolve(smp[hr], stencil, mode='wrap') - smp[dn])
 	return smp[up]
 
 #######################################################################
@@ -52,7 +56,8 @@ def step(i):
 import matplotlib.pyplot as plt
 
 fig = plt.figure(); ax = fig.gca()
-wave = plt.imshow(smp[1], extent=[-l,l,-l,l], vmin=-1.0, vmax=1.0, cmap='seismic', interpolation='none')
+wave = plt.imshow(smp[1], cmap='seismic', vmin=-1.0, vmax=1.0, extent=[-l,l,-l,l], origin='lower', interpolation='none')
+#plt.contourf(mask, extent=[-l,l,-l,l], colors=['#00000000', 'skyblue'])
 
 #######################################################################
 import matplotlib.animation as animation

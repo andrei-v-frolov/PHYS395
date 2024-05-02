@@ -35,6 +35,9 @@
 ### Wave Reflections: <a href="../09 Hyperbolic PDEs/wave-1.py">09 Hyperbolic PDEs/wave-1.py</a> <img src="animated.png" alt="animated demo" height=24>
 <img src="wave.png" alt="Wave reflection with Dirichlet and Neumann BC" width=842>
 
+### Waves in a Pool: <a href="../09 Hyperbolic PDEs/wave-2.py">09 Hyperbolic PDEs/wave-2.py</a> <img src="animated.png" alt="animated demo" height=24>
+<img src="wave.png" alt="Wave reflections from complicated boundary" width=653>
+
 ## Quantum Mechanics
 
 ### Eigenstates of Quantum Oscillator: <a href="../08 BVPs/quantum.py">08 BVPs/quantum.py</a> <img src="animated.png" alt="animated demo" height=24> <img src="interactive.png" alt="interactive demo" height=24>
