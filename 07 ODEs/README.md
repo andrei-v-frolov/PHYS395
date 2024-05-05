@@ -9,6 +9,7 @@
 ### Physics Examples
 
 - `ballistic.py` - interactive demo of ballistic motion
+- `capture.py` - particle trajectories around a black hole
 - `phase.py` - phase space portrait of physical pendulum
 - `pendulum-1.py` - animated physical pendulum evolution
 - `pendulum-2.py` - animated double pendulum evolution

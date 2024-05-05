@@ -30,6 +30,11 @@
 ### Double Pendulum: <a href="../07 ODEs/pendulum-2.py">07 ODEs/pendulum-2.py</a> <img src="animated.png" alt="animated demo" height=24>
 <img src="pendulum2.png" alt="Double pendulum evolution" width=619>
 
+## General Relativity
+
+### Scattering by a Black Hole: <a href="../07 ODEs/capture.py">07 ODEs/capture.py</a> <img src="interactive.png" alt="interactive demo" height=24>
+<img src="escape.png" alt="Scattering and capture of particles by a black hole" width=834>
+
 ## Vibrations & Waves
 
 ### Wave Reflections: <a href="../09 Hyperbolic PDEs/wave-1.py">09 Hyperbolic PDEs/wave-1.py</a> <img src="animated.png" alt="animated demo" height=24>

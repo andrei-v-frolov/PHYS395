@@ -98,7 +98,7 @@ def update(value):
 	global alpha, beta
 	alpha = alpha_slider.val; beta = beta_slider.val
 	x,y = trajectory(v_slider.val, angle_slider.val)
-	path.set_data(x,y); fig.canvas.draw_idle()
+	path.set_data(x,y); #fig.canvas.draw_idle()
 
 # register update handler
 v_slider.on_changed(update)
