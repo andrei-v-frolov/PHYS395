@@ -65,7 +65,7 @@
 ### Cylinder Waveguide Modes
 <img src="TM.png" alt="Cylinder waveguide TM mode" width=494>
 
-### Synchrotron radiation: <a href="../13 Odds and Ends/synchrotron.py">13 Odds and Ends/synchrotron.py</a> <img src="animated.png" alt="animated demo" height=24>
+### Relativistic Synchrotron Radiation: <a href="../13 Odds and Ends/synchrotron.py">13 Odds and Ends/synchrotron.py</a> <img src="animated.png" alt="animated demo" height=24>
 <img src="synchrotron.png" alt="Synchrotron radiation of a relativistic charge" width=653>
 
 ## Condensed Matter
