@@ -78,6 +78,9 @@
 ### Non-Local Means: <a href="../12 Computer Vision/nlmean.py">12 Computer Vision/nlmean.py</a>
 <img src="nlmean.png" alt="Noise removal with non-local means" width=523>
 
+### Entropy Detects AI Image Augmentation: <a href="../12 Computer Vision/entropy.py">12 Computer Vision/entropy.py</a>
+<img src="entropy.png" alt="Local entropy estimator of AI-augmented image" width=800>
+
 ## Neural Networks
 
 ### Recognizing Hand-Written Digits: <a href="../06 Neural Networks/digits/README.md">06 Neural Networks/digits</a>
