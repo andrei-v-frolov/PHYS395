@@ -60,28 +60,41 @@ state = np.array([1.0,0.0,0.0,-1.0]); E0 = E(state)
 #######################################################################
 
 # forward Euler step (1st order)
-def euler(state):
+def euler(state, dt):
 	return state + f(state)*dt
 
 # backward Euler step (1st order)
-def ieuler(state):
+def ieuler(state, dt):
 	return root(lambda x: x - state - f(x)*dt, state).x
 
 # explicit midpoint (aka RK2)
-def midpoint(state):
+def midpoint(state, dt):
 	return state + f(state + f(state)*dt/2.0)*dt
 
 # implicit midpoint (aka GL2)
-def imidpoint(state):
+def imidpoint(state, dt):
 	return root(lambda x: x - state - f((x+state)/2.0)*dt, state).x
 
 # 4-th order Runge-Kutta method
-def rk4(state):
+def rk4(state, dt):
 	k1 = f(state)
 	k2 = f(state+k1*dt/2.0)
 	k3 = f(state+k2*dt/2.0)
 	k4 = f(state+k3*dt)
 	return state + (k1+2.0*k2+2.0*k3+k4)*dt/6.0
+
+# n-th order Richardson extrapolation (even n only)
+def re(n, state, dt):
+	match n:
+		case 1: return euler(state, dt)
+		case 2: return midpoint(state, dt)
+		case 4: return rk4(state, dt)
+		case k:
+			w = 2**(k-2)
+			y1 = re(n-2, state, dt)
+			y2 = re(n-2, state, dt/2.0)
+			y3 = re(n-2, y2, dt/2.0)
+			return (w*y3 - y1)/(w - 1.0)
 
 #######################################################################
 # operator splitting methods for separable Hamiltonian (hard-coded EoM)
@@ -148,7 +161,7 @@ def si(n, state, dt):
 # Gauss-Legendre methods; symplectic with arbitrary Hamiltonian, A-stable
 #######################################################################
 
-from gl import gl2, gl4, gl6, gl8, gl10, gl12
+from gl import gl4, gl6, gl8, gl10, gl12
 
 #######################################################################
 
@@ -157,7 +170,7 @@ t = 0.0; history = np.zeros([dim+2,n])
 
 # evolve dynamical system with specified method
 for i in range(0,n):
-	t += dt; state = rk4(state)
+	t += dt; state = rk4(state,dt)
 	history[:,i] = [*state, t, E(state)-E0]
 
 #######################################################################
