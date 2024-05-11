@@ -91,9 +91,9 @@ def re(n, state, dt):
 		case 4: return rk4(state, dt)
 		case k:
 			w = 2**(k-2)
-			y1 = re(n-2, state, dt)
-			y2 = re(n-2, state, dt/2.0)
-			y3 = re(n-2, y2, dt/2.0)
+			y1 = re(k-2, state, dt)
+			y2 = re(k-2, state, dt/2.0)
+			y3 = re(k-2, y2, dt/2.0)
 			return (w*y3 - y1)/(w - 1.0)
 
 #######################################################################
@@ -170,8 +170,10 @@ t = 0.0; history = np.zeros([dim+2,n])
 
 # evolve dynamical system with specified method
 for i in range(0,n):
-	t += dt; state = rk4(state,dt)
-	history[:,i] = [*state, t, E(state)-E0]
+	#y1 = rk4(state,dt/2.0); y2 = rk4(y1,dt/2.0)
+	t += dt; state = rk4(state,dt); error = E(state)-E0
+	#error = np.linalg.norm(y2-state)
+	history[:,i] = [*state, t, error]
 
 #######################################################################
 
