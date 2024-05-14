@@ -20,3 +20,7 @@ The course covers advanced numerical methods for scientific computing and provid
 - Going parallel on shared memory and MPI architectures (if time allows)
 
 Programming environment is Python, with some exposure to compilers like Fortran later in the course. Homework and final are coding; you are expected to produce a working code that compiles, runs, and finds accurate numerical solution to the problem assigned. Bringing your own laptop is encouraged, but no technical support for Windows will be provided.
+
+### Lecture Notes:
+
+Lecture notes for the course are archived <a href="https://www.dropbox.com/scl/fo/jxe7wo5eedy1ygx6aihgz/AHitIFp8RjF55INcTFnO0ak?rlkey=9e3ozb1vuyfv7ivbydrzkhl30&dl=0">online</a>, and should serve as documentation for the code of sorts, explaining what numerical techniques were used and why. For a quick view of what is possible, take a look at the <a href="blob/2024/YY%20Gallery/README.md">course gallery</a>.
