@@ -23,4 +23,4 @@ Programming environment is Python, with some exposure to compilers like Fortran 
 
 ### Lecture Notes:
 
-Lecture notes for the course are archived <a href="https://www.dropbox.com/scl/fo/jxe7wo5eedy1ygx6aihgz/AHitIFp8RjF55INcTFnO0ak?rlkey=9e3ozb1vuyfv7ivbydrzkhl30&dl=0">online</a>, and should serve as documentation for the code of sorts, explaining what numerical techniques were used and why. For a quick view of what is possible, take a look at the <a href="blob/2024/YY%20Gallery/README.md">course gallery</a>.
+Lecture notes for the course are archived <a href="https://www.dropbox.com/scl/fo/jxe7wo5eedy1ygx6aihgz/AHitIFp8RjF55INcTFnO0ak?rlkey=9e3ozb1vuyfv7ivbydrzkhl30&dl=0">online</a>, and should serve as documentation for the code of sorts, explaining what numerical techniques were used and why. For a quick view of what is possible, take a look at the <a href="YY%20Gallery/README.md">course gallery</a>.
