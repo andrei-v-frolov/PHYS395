@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# heat diffusion equation (in two dimensions)
+# solve Poisson equation L[phi] = rho by diffusion (in two dimensions)
 
 #######################################################################
 
@@ -16,7 +16,8 @@ dx = 2.0*l/(n-1); x = np.linspace(-l,l,n)
 
 # initial field profile
 X,Y = np.meshgrid(x,x)
-phi = 3.0*np.exp(-(X*X+Y*Y)*256.0)
+phi = np.zeros([n,n])
+rho = 0.0*np.exp(-(X*X+Y*Y)*256.0)
 
 #######################################################################
 
@@ -42,7 +43,7 @@ stencil = np.array([[0,0,0],[0,1,0],[0,0,0]]) + laplacian*dt
 # advance solution to the next step (enforcing BCs)
 def step(i):
 	global phi
-	phi = convolve(phi, stencil, mode='constant'); #bc()
+	phi = convolve(phi, stencil, mode='constant') - rho*dt; bc()
 	return phi
 
 #######################################################################
