@@ -16,6 +16,17 @@ x = uniform(-15.0, 15.0, size=chains)
 def likelihood(x):
 	return np.exp(-x*x/2.0)
 
+'''
+# random Hamiltonian kick, with dt ~ T/32
+def kick(x, pi=3.0, dt=0.02, steps=16):
+	x = x.copy(); vx = normal(scale=pi, size=chains)
+	for k in range(steps):
+		x += vx * (dt/2.0)
+		vx -= x * dt
+		x += vx * (dt/2.0)
+	return x
+'''
+
 # random step size (adjust for acceptance rate ~ 0.5)
 sigma = 0.3
 
@@ -23,6 +34,7 @@ sigma = 0.3
 history = np.zeros([n,chains])
 
 for i in range(0,n):
+	#y = kick(x)
 	y = x + normal(scale=sigma, size=chains)
 	alpha = likelihood(y)/likelihood(x)
 	
