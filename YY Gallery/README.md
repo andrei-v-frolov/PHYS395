@@ -65,7 +65,7 @@
 ### Cylinder Waveguide Modes
 <img src="TM.png" alt="Cylinder waveguide TM mode" width=494>
 
-### Relativistic Synchrotron Radiation: <a href="../13 Odds and Ends/synchrotron.py">13 Odds and Ends/synchrotron.py</a> <img src="animated.png" alt="animated demo" height=24> <img src="interactive.png" alt="interactive demo" height=24>
+### Relativistic Synchrotron Radiation: <a href="../14 Odds and Ends/synchrotron.py">14 Odds and Ends/synchrotron.py</a> <img src="animated.png" alt="animated demo" height=24> <img src="interactive.png" alt="interactive demo" height=24>
 <img src="synchrotron.png" alt="Synchrotron radiation of a relativistic charge" width=653>
 
 ## Condensed Matter
@@ -78,10 +78,10 @@
 
 ## Image Processing
 
-### Non-Local Means: <a href="../12 Computer Vision/nlmean.py">12 Computer Vision/nlmean.py</a>
+### Non-Local Means: <a href="../13 Computer Vision/nlmean.py">13 Computer Vision/nlmean.py</a>
 <img src="nlmean.png" alt="Noise removal with non-local means" width=523>
 
-### Entropy Estimator Detects AI Image Augmentation: <a href="../12 Computer Vision/entropy.py">12 Computer Vision/entropy.py</a>
+### Entropy Estimator Detects AI Image Augmentation: <a href="../13 Computer Vision/entropy.py">13 Computer Vision/entropy.py</a>
 <img src="entropy.png" alt="Local entropy estimator of AI-augmented image" width=800>
 
 ## Neural Networks
