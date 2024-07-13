@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# time precompiled finite difference Laplacian stencils using Numba
+# time finite difference Laplacian stencils precompiled using Numba
 
 #######################################################################
 
@@ -38,8 +38,7 @@ x = np.zeros([n,n]); x[3,3] = 1.0
 # 2D laplacian stencil via traditional loop
 @jit(nogil=True,cache=True)
 def laplacian_2d(x):
-	m,n = x.shape
-	y = np.zeros_like(x)
+	m,n = x.shape; y = np.zeros_like(x)
 	for i in range(1,m-1):
 		for j in range(1,n-1):
 			y[i,j] = x[i-1,j] + x[i,j-1] - 4.0*x[i,j] + x[i,j+1] + x[i+1,j]
