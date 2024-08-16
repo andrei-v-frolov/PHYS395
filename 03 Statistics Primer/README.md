@@ -19,11 +19,11 @@
 - `scatter.py` - scatter plot of bivariate PDF, with a few variations
 - `covariance.py` - compute the covariance of supplied data, and draw Gaussian sample with the same...
 - `pca.py` - compute SVD of supplied data, and keep only a few components
-- `mock.py` - mock up a Gaussian random process based on a few samples
 
 ### Random Processes
 
 - `walk.py` - stochastic processes (aka random walk) demo
+- `mock.py` - mock up a Gaussian random process based on a few samples
 - `mcmc-?.py` - MCMC samplers using Metropolis-Hastings algorithm
 - `field-?.py` - Gaussian random field generators using FFTs
 
