@@ -43,6 +43,7 @@ def solve(rho):
 #residual = solve(df) + f
 
 phi = solve(charge(0,0))
+#phi = solve(charge(-1.0,-0.7,1.5,0.10) + charge(1.6,0.3,-2.0,0.15) + charge(-0.2,0.6,-2.0,0.20))
 
 #######################################################################
 
@@ -50,11 +51,24 @@ import matplotlib.pyplot as plt
 
 fig = plt.figure(); ax = fig.gca()
 
+# warm color map
 pot = plt.imshow(phi, cmap='OrRd', extent=[-lx,lx,-ly,ly], origin='lower', interpolation='none')
 plt.colorbar()
 
 levels = [np.max(phi)/2**(5-i) for i in range(5)]
-iso = ax.contour(phi, levels=levels, cmap='Reds', norm='log', vmin=levels[0]/2, extent=[-lx,lx,-ly,ly])
+style = {'levels': levels, 'cmap': 'Reds', 'norm': 'log', 'vmin': levels[0]/2}
+iso = ax.contour(phi, extent=[-lx,lx,-ly,ly], **style)
+
+'''
+# symmetric color map
+z0 = np.max(np.abs(phi))
+
+pot = plt.imshow(phi, cmap='seismic', vmin=-z0, vmax=z0, extent=[-lx,lx,-ly,ly], origin='lower', interpolation='none')
+plt.colorbar()
+
+style = {'levels': 21, 'cmap': 'coolwarm'}
+iso = ax.contour(phi, extent=[-lx,lx,-ly,ly], **style)
+'''
 
 #######################################################################
 
@@ -83,7 +97,7 @@ def update(value):
 	phi = solve(charge(x_slider.val,y_slider.val))
 	pot.set_data(phi)
 	global iso; iso.remove()
-	iso = ax.contour(phi, levels=levels, cmap='Reds', norm='log', vmin=levels[0]/2, extent=[-lx,lx,-ly,ly])
+	iso = ax.contour(phi, extent=[-lx,lx,-ly,ly], **style)
 
 # register update handler
 x_slider.on_changed(update)
