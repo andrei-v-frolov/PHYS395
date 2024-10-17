@@ -35,6 +35,8 @@
 ### Scattering by a Black Hole: <a href="../07 ODEs/capture.py">07 ODEs/capture.py</a> <img src="interactive.png" alt="interactive demo" height=24>
 <img src="escape.png" alt="Scattering and capture of particles by a black hole" width=834>
 
+### Orbit around a Black Hole: <a href="../07 ODEs/bound.py">07 ODEs/bound.py</a> <img src="orbit.png" alt="Bound orbits of particle around a black hole" width=596>
+
 ## Vibrations & Waves
 
 ### Wave Reflections: <a href="../09 Hyperbolic PDEs/wave-1.py">09 Hyperbolic PDEs/wave-1.py</a> <img src="animated.png" alt="animated demo" height=24>
