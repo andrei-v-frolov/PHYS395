@@ -16,6 +16,7 @@ print(y)
 
 #######################################################################
 
+#from pltconfig import *
 import matplotlib.pyplot as plt
 
 plt.figure()
@@ -26,4 +27,8 @@ plt.fill_between(x, y, -1.0, color='green', alpha=0.2)
 
 plt.xlim([a,b])
 
+# show in interactive console
 plt.show()
+
+# render the figure to a file
+#plt.savefig("output.pdf", bbox_inches='tight', pad_inches=0.02, transparent=True)

@@ -6,3 +6,4 @@
 - `pitfalls.py` - common pitfalls in Python numerical code
 - `fibonacci-?.py` - five ways to compute Fibonacci numbers
 - `plot.py` - introduction to plotting in Python
+- `pltconfig.py` - configuration for publication-quality output
