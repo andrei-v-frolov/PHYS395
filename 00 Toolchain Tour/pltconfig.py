@@ -10,8 +10,8 @@ params = {
 	'ytick.major.pad': 11,
 	'xtick.major.pad': 11,
 	'ytick.labelsize': 16,
-	'font.family':'sans-serif',
 	'font.size': 16,
+	'font.family': 'sans-serif',
 	'font.sans-serif': 'FreeSans'
 }
 
@@ -20,7 +20,7 @@ rcParams.update(params)
 # output plot as PDF file
 output = {
 	'backend': 'pdf',
-	'savefig.dpi': 300,
+	'savefig.dpi': 300
 }
 
 rcParams.update(output)
