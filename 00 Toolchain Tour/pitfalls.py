@@ -13,6 +13,13 @@ print(4/3, 4//3)
 # max integer size in intrinsic vs NumPy types
 i = 1 << 72; n = np.array([1]) << 72; print(i,n[0])
 
+# testing floats for equality is generally not safe
+a = np.array([1.0e12], dtype='float32')
+print(a == a + 1.0)
+
+a = np.array([1.0/100000000], dtype='float32')
+print(100000000*a == 1.0)
+
 # limited float precision can lead to unexpected results
 n = 1000000
 a = np.array([0,0], dtype='int64')
