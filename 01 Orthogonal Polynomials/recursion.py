@@ -56,10 +56,12 @@ print(f'Evaluation takes {t2-t1}s to complete')
 
 import matplotlib.pyplot as plt
 
-plt.figure()
+plt.figure(figsize=(8,4))
 
-plt.plot(x, B.T, '-', linewidth=3)
+plt.plot(x, P.T, '-', linewidth=3)
 #plt.plot(x, P[n]-B[n], 'r-')
+
+plt.axhline(0.0, color='black', linestyle=':', zorder=0)
 
 plt.xlim([-1.0,1.0])
 
