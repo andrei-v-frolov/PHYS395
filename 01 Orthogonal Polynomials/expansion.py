@@ -27,20 +27,15 @@ f = np.exp(-x*x*4.5)
 # find coefficients that satisfy f = B*c
 B = legvander(x,n-1); c = solve(B,f)
 
-# compute singular value decomposition
-#U,S,V = svd(B); print(norm(U*S@V - B)/n)
+# compute singular value decomposition and pseudo-inverse
+#U,S,V = svd(B); print(f'SVD accuracy {norm(U*S@V - B)/n}')
+#c = V.T*np.where(S > 1.0e-12*S[0], 1.0/S, 0.0) @ U.T @ f
 
 # or, just the singular values
 S = svd(B, compute_uv=False)
 
-# if S was *not* sorted already, we could do
-#S = np.sort(S, kind='stable')[::-1]
-
-# for ill-conditioned matrix, pseudo-inverse is better!
-#c = V.T*np.where(S > 1.0e-12*S[0], 1.0/S, 0.0) @ U.T @ f
-
 # compute condition number of a matrix
-print(f'Condition number is {S[0]/S[-1]:.3g}')
+print(f'Condition number is {S.max()/S.min():g}')
 
 #######################################################################
 
@@ -53,6 +48,9 @@ f = np.exp(-x*x*4.5)
 
 # evaluate polynomial expansion
 g = legval(x,c)
+
+# residual error metrics
+print(f'Maximal residual {np.max(np.abs(g-f)):g}, RMS error {norm(g-f)/n:g}')
 
 #######################################################################
 
