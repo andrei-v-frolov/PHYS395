@@ -5,3 +5,4 @@
 ### Orthogonal Polynomials
 
 - `recursion.py` - compute orthogonal polynomials by recursion
+- `expansion.py` - compute orthogonal polynomial expansion coefficients
