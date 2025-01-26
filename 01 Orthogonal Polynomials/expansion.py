@@ -50,7 +50,7 @@ f = np.exp(-x*x*4.5)
 g = legval(x,c)
 
 # residual error metrics
-print(f'Maximal residual {np.max(np.abs(g-f)):g}, RMS error {norm(g-f)/n:g}')
+print(f'Maximal residual {np.max(np.abs(g-f)):g}, RMS error {norm(g-f)/pts:g}')
 
 #######################################################################
 

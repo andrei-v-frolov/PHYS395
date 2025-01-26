@@ -6,3 +6,4 @@
 
 - `recursion.py` - compute orthogonal polynomials by recursion
 - `expansion.py` - compute orthogonal polynomial expansion coefficients
+- `collocation.py` - effects of collocation grid choice on accuracy
