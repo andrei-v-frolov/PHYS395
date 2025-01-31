@@ -29,8 +29,8 @@ print(f'Nyquist frequency is {k[n//2]}')
 f = np.exp(-x*x*4.5); df = -9.0*x*f
 
 # PERIODIC test function (and its derivative)
-#y = np.sin(np.pi*x/(2*l)); z = np.cos(np.pi*x/(2*l)) 
-#f = np.exp(-y*y*4.5); df = -(9.0*np.pi/(2*l))*y*z*f
+#w = np.pi/(2*l); y = np.sin(w*x)/w
+#f = np.exp(-y*y*4.5); df = -9.0*y*f*np.cos(w*x)
 
 # NYQUIST mode function (and its derivative)
 #f = np.cos(np.pi*nn*x); ddf = -(np.pi*nn)**2*f

@@ -11,7 +11,7 @@ n = 256
 
 # cosine evaluation grid - EXCLUDING endpoints
 dt = np.pi/n; theta = np.linspace(np.pi-dt/2, dt/2, n)
-l = 1.0; x = l * np.cos(theta); k = np.arange(n)/l
+l = 1.0; x = l*np.cos(theta); k = np.arange(n)/l
 
 #######################################################################
 
@@ -19,8 +19,8 @@ l = 1.0; x = l * np.cos(theta); k = np.arange(n)/l
 f = np.exp(-x*x*4.5); df = -9.0*x*f
 
 # PERIODIC test function (and its derivative)
-#y = np.sin(np.pi*x/(2*l)); z = np.cos(np.pi*x/(2*l)) 
-#f = np.exp(-y*y*4.5); df = -(9.0*np.pi/(2*l))*y*z*f
+#w = np.pi/(2*l); y = np.sin(w*x)/w
+#f = np.exp(-y*y*4.5); df = -9.0*y*f*np.cos(w*x)
 
 #######################################################################
 
