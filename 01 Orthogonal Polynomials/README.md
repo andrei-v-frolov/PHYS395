@@ -12,3 +12,4 @@
 
 - `fft.py` - compute (complex) fast Fourier transform of a function
 - `rfft.py` - compute (real) fast Fourier transform of a function
+- `chebyshev.py` - compute fast Chebyshev transform of a function
