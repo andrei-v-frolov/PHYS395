@@ -7,3 +7,8 @@
 - `recursion.py` - compute orthogonal polynomials by recursion
 - `expansion.py` - compute orthogonal polynomial expansion coefficients
 - `collocation.py` - effects of collocation grid choice on accuracy
+
+### Fast Fourier and Chebyshev Transforms
+
+- `fft.py` - compute (complex) fast Fourier transform of a function
+- `rfft.py` - compute (real) fast Fourier transform of a function
