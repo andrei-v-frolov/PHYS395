@@ -7,6 +7,7 @@
 - `recursion.py` - compute orthogonal polynomials by recursion
 - `expansion.py` - compute orthogonal polynomial expansion coefficients
 - `collocation.py` - effects of collocation grid choice on accuracy
+- `legroots.py` - compute roots of Legendre polynomial using Jacobi matrix
 
 ### Fast Fourier and Chebyshev Transforms
 
