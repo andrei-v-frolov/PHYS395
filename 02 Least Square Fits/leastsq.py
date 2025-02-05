@@ -1,9 +1,14 @@
 #!/usr/bin/env python
 # generalized least square fit to supplied data
+# run as: python leastsq.py < DATA
 # expected data format: x f [sigma]
 
 #######################################################################
 
+# operating system functions (for standard stream access)
+import sys
+
+# numerical libraries
 import numpy as np
 from numpy.linalg import lstsq, solve, svd, norm
 from numpy.polynomial.chebyshev import chebvander, chebval
@@ -13,8 +18,8 @@ from numpy.polynomial.chebyshev import chebvander, chebval
 # number of coefficients to fit
 n = 30; epsilon = 0.0e-3
 
-# load data from file (TBD: read from stdin)
-data = np.loadtxt('data.txt')
+# load data from stdin
+data = np.loadtxt(sys.stdin)
 
 # sanity check on supplied data format
 pts,columns = data.shape
