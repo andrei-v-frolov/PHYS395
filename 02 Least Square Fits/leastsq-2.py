@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# generalized least square fit to supplied data
+# generalized least square fit to supplied data (serial version)
 # run as: python leastsq.py < DATA
 # expected data format: x f [sigma]
 
@@ -18,34 +18,25 @@ from numpy.polynomial.chebyshev import chebvander, chebval
 # number of coefficients to fit
 n = 30; epsilon = 0.0e-3
 
-# load data from stdin
-data = np.loadtxt(sys.stdin)
+# accumulators
+A = np.zeros([n,n])
+y = np.zeros(n)
 
-# sanity check on supplied data format
-pts,columns = data.shape
-assert columns >= 2, f'Expecting at least 2 columns, got only {columns}'
-
-# data to be fitted
-x = data[:,0]
-f = data[:,1]
-
-# optional weights
-W = 1.0/data[:,2]**2 if columns > 2 else np.ones(pts)
-
-# expansion basis
-B = chebvander(x,n-1)
-
-# NumPy has built-in solver minimizing |B*c-f|^2
-#c,*r = lstsq(B,f,rcond=epsilon)
-
-#######################################################################
-
-# it is better to cast the problem to nxn matrix as
-A = np.matmul(B.T*W, B)
-y = np.matmul(B.T*W, f)
+# process data line by line (NOT loading to memory)
+for line in sys.stdin:
+	# parse whitespace separated floats
+	x,f,*sigma = [float(s) for s in line.split()]
+	# assign weight if sigma was supplied
+	w = 1.0/sigma[0]**2 if len(sigma) > 0 else 1.0
+	# basis is Chebyshev polynomials
+	b = np.cos(np.arange(n)*np.arccos(x))
+	# accumulate fit matrices
+	A += w*np.outer(b,b); y += w*f*b
 
 # explicit regularization could be added, like so
 #A += 1.0*np.diag(np.arange(n)**2)
+
+#######################################################################
 
 # solve for best fit coefficients
 c = solve(A,y)
@@ -59,14 +50,16 @@ c = solve(A,y)
 # this is equivalent to calling
 #c,*r = lstsq(A,y,rcond=epsilon**2)
 
-# evaluate best fit
+# test grid (we did NOT store original data)
+x = np.linspace(-1.0,1.0,256)
+
+# evaluate best fit 
 g = chebval(x, c)
 
 #######################################################################
 
 import matplotlib.pyplot as plt
 
-plt.plot(x, f)
 plt.plot(x, g, linewidth=3)
 
 # restrict x axis range
