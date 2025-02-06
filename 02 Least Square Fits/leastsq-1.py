@@ -35,10 +35,10 @@ W = 1.0/data[:,2]**2 if columns > 2 else np.ones(pts)
 # expansion basis
 B = chebvander(x,n-1)
 
+#######################################################################
+
 # NumPy has built-in solver minimizing |B*c-f|^2
 #c,*r = lstsq(B,f,rcond=epsilon)
-
-#######################################################################
 
 # it is better to cast the problem to nxn matrix as
 A = np.matmul(B.T*W, B)
