@@ -6,7 +6,7 @@
 #######################################################################
 
 # operating system functions (for standard stream access)
-import sys
+from sys import stdin
 
 # numerical libraries
 import numpy as np
@@ -23,7 +23,7 @@ A = np.zeros([n,n])
 y = np.zeros(n)
 
 # process data line by line (NOT loading to memory)
-for line in sys.stdin:
+for line in stdin:
 	# parse whitespace separated floats
 	x,f,*sigma = [float(s) for s in line.split()]
 	# assign weight if sigma was supplied

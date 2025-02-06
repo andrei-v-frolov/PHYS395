@@ -6,7 +6,7 @@
 #######################################################################
 
 # operating system functions (for standard stream access)
-import sys
+from sys import stdin
 
 # numerical libraries
 import numpy as np
@@ -19,7 +19,7 @@ from numpy.polynomial.chebyshev import chebvander, chebval
 n = 30; epsilon = 0.0e-3
 
 # load data from stdin
-data = np.loadtxt(sys.stdin)
+data = np.loadtxt(stdin)
 
 # sanity check on supplied data format
 pts,columns = data.shape
