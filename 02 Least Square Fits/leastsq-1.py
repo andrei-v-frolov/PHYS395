@@ -5,7 +5,7 @@
 
 #######################################################################
 
-# operating system functions (for standard stream access)
+# standard input access
 from sys import stdin
 
 # numerical libraries
