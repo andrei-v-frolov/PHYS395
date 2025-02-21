@@ -11,3 +11,4 @@
 ### Multivariate Distributions
 
 - `stocks/` - sample stock data from [NASDAQ](https://www.nasdaq.com/market-activity/quotes/historical)
+- `scatter.py` - scatter plot of bivariate PDF
