@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# plot stock prices for trading days
+# plot stock prices (on trading days)
 #######################################################################
 
 import numpy as np
