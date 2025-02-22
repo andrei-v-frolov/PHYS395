@@ -9,7 +9,7 @@ stocks = np.loadtxt('stocks.dat')
 n,columns = stocks.shape
 
 plt.plot(stocks)
-plt.legend(["AAPL", "AMD", "AMZN", "CSCO", "GOOGL", "INTC", "META", "MSFT", "NFLX", "NVDA", "QCOM", "SBUX", "TSLA"])
+plt.legend(["AAPL", "AMD", "AMZN", "CSCO", "GOOGL", "INTC", "META", "MSFT", "NFLX", "NVDA", "QCOM", "SBUX", "TSLA"], frameon=False)
 plt.xlim([0,n])
 
 plt.show()
