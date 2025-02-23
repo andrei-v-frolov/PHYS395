@@ -13,3 +13,4 @@
 - `stocks/` - sample stock data from [NASDAQ](https://www.nasdaq.com/market-activity/quotes/historical)
 - `scatter.py` - scatter plot of bivariate PDF
 - `covariance.py` - compute the covariance of supplied data
+- `pca.py` - compute principal components of supplied data
