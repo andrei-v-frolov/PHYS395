@@ -41,7 +41,8 @@ def capture(z):
 		f = z**3-1.0; residual = abs(f)
 		if (residual < epsilon): break
 		z -= f/(3.0*z*z)
-	return i
+	# since convergence is quadratic, we can extrapolate it to floats
+	return i - np.log2(np.log(min(residual,epsilon))/np.log(epsilon))
 
 # evaluate convergence for all starting values
 q = np.vectorize(capture)(z)
