@@ -12,12 +12,11 @@ from numba import vectorize, float64, complex128
 #######################################################################
 
 # resolution, oversampling, and interval to sample
-n = 1024; os = 4; l = 3.0
-n = n*os + (2 if os > 1 else 0)
+n = 1024; os = 4; l = 3.0; dx = l/(n*os)
 
 # grid of starting values
-re = np.linspace(-l, l, n)
-im = np.linspace(-l, l, n)
+re = np.linspace(-l+dx, l-dx, n*os)
+im = np.linspace(-l+dx, l-dx, n*os)
 a,b = np.meshgrid(re,im)
 
 # form a complex-valued array
@@ -57,6 +56,7 @@ q = capture(z)
 
 # fast decimator using CIC filter (for oversampled rendering)
 # https://en.wikipedia.org/wiki/Cascaded_integrator–comb_filter
+q = np.pad(q, (1,0))
 q = np.diff(np.cumsum(q, axis=0)[::os,:], axis=0)/os
 q = np.diff(np.cumsum(q, axis=1)[:,::os], axis=1)/os
 
