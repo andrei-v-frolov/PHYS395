@@ -6,6 +6,9 @@
 # numerical libraries
 import numpy as np
 
+# just-in-time compiler (comment out if unavailable)
+from numba import vectorize, float64, complex128
+
 #######################################################################
 
 # resolution and interval to sample
@@ -36,6 +39,7 @@ q = np.abs(z**3-1) + 1.0e-6
 iterations = 50; epsilon = 1.0e-6
 
 # number of iterations needed to converge
+@vectorize([float64(complex128)])
 def capture(z):
 	for i in range(iterations):
 		f = z**3-1.0; residual = abs(f)
@@ -45,7 +49,8 @@ def capture(z):
 	return i - np.log2(np.log(min(residual,epsilon))/np.log(epsilon))
 
 # evaluate convergence for all starting values
-q = np.vectorize(capture)(z)
+#q = np.vectorize(capture)(z)
+q = capture(z)
 
 #######################################################################
 
