@@ -11,8 +11,9 @@ from numba import vectorize, float64, complex128
 
 #######################################################################
 
-# resolution and interval to sample
-n = 1024; l = 3.0
+# resolution, oversampling, and interval to sample
+n = 1024; os = 4; l = 3.0
+n = n*os + (2 if os > 1 else 0)
 
 # grid of starting values
 re = np.linspace(-l, l, n)
@@ -51,6 +52,13 @@ def capture(z):
 # evaluate convergence for all starting values
 #q = np.vectorize(capture)(z)
 q = capture(z)
+
+#######################################################################
+
+# fast decimator using CIC filter (for oversampled rendering)
+# https://en.wikipedia.org/wiki/Cascaded_integrator–comb_filter
+q = np.diff(np.cumsum(q, axis=0)[::os,:], axis=0)/os
+q = np.diff(np.cumsum(q, axis=1)[:,::os], axis=1)/os
 
 #######################################################################
 
