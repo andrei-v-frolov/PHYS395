@@ -12,7 +12,7 @@ from numba import vectorize, float64, complex128
 #######################################################################
 
 # resolution, oversampling, and interval to sample
-n = 1024; os = 5; l = 3.0; dx = l/(n*os)
+n = 1024; os = 1; l = 3.0; dx = l/(n*os)
 
 # grid of starting values
 re = np.linspace(-l+dx, l-dx, n*os)
@@ -37,7 +37,6 @@ q = np.abs(z**3-1) + 1.0e-6
 
 #######################################################################
 
-'''
 # max iterations and tolerance
 iterations = 50; epsilon = 1.0e-6
 
@@ -54,12 +53,12 @@ def capture(z):
 # evaluate convergence for all starting values
 #q = np.vectorize(capture)(z)
 q = capture(z)
-'''
 
 #######################################################################
 # Mandelbrot fractal (iterating z -> z^2+c until divergence)
 #######################################################################
 
+'''
 # max iterations and escape radius
 iterations = 100; radius = 10.0
 
@@ -78,6 +77,7 @@ q = escape(z)
 
 # replace NaNs with 0.0 for averaging
 #q = np.nan_to_num(q)
+'''
 
 #######################################################################
 
@@ -89,9 +89,11 @@ q = np.diff(np.cumsum(q, axis=0)[::os,:], axis=0)/os
 q = np.diff(np.cumsum(q, axis=1)[:,::os], axis=1)/os
 '''
 
+'''
 # alternatively, median filter could be used instead
 from scipy.ndimage import median_filter as median
 q = median(q, os)[os//2::os,os//2::os]
+'''
 
 #######################################################################
 
