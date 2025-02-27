@@ -21,12 +21,30 @@ z = a + b*1j
 
 #######################################################################
 
+'''
 # simplest way to see the structure
 for i in range(8):
 	z -= (z**3-1)/(3.0*z**2)
 
 # not the prettiest, but servicable
 q = np.abs(z**3-1) + 1.0e-6
+'''
+
+#######################################################################
+
+# max iterations and tolerance
+iterations = 50; epsilon = 1.0e-6
+
+# number of iterations needed to converge
+def capture(z):
+	for i in range(iterations):
+		f = z**3-1.0; residual = abs(f)
+		if (residual < epsilon): break
+		z -= f/(3.0*z*z)
+	return i
+
+# evaluate convergence for all starting values
+q = np.vectorize(capture)(z)
 
 #######################################################################
 
