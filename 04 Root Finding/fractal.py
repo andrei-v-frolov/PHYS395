@@ -23,6 +23,8 @@ a,b = np.meshgrid(re,im)
 z = a + b*1j
 
 #######################################################################
+# Newton's fractal (convergence of Newton's method solving z^3=1)
+#######################################################################
 
 '''
 # simplest way to see the structure
@@ -35,6 +37,7 @@ q = np.abs(z**3-1) + 1.0e-6
 
 #######################################################################
 
+'''
 # max iterations and tolerance
 iterations = 50; epsilon = 1.0e-6
 
@@ -51,6 +54,30 @@ def capture(z):
 # evaluate convergence for all starting values
 #q = np.vectorize(capture)(z)
 q = capture(z)
+'''
+
+#######################################################################
+# Mandelbrot fractal (iterating z -> z^2+c until divergence)
+#######################################################################
+
+# max iterations and escape radius
+iterations = 100; radius = 10.0
+
+# number of iterations needed to escape
+@vectorize([float64(complex128)])
+def escape(c):
+	z = 0j
+	for i in range(iterations):
+		z = z*z + c; r = abs(z)
+		if (r > radius): break
+	return i + np.sqrt(0.5) - np.log2(np.log(r))
+
+# evaluate convergence for all starting values
+#q = np.vectorize(escape)(z)
+q = escape(z)
+
+# replace NaNs with 0.0 for averaging
+#q = np.nan_to_num(q)
 
 #######################################################################
 
