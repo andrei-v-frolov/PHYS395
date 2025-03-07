@@ -3,3 +3,4 @@
 - `model.py` - generate some test data for least square fit
 - `leastsq-1.py` - generalized least square fit to supplied data, matmul version
 - `leastsq-2.py` - generalized least square fit to supplied data, serial version
+- `mcmc.py` - Markov chain Monte Carlo sampler of non-linear least square fit
