@@ -9,4 +9,4 @@
 ### Worked Examples
 
 - `digits` - recognizing [handwritten digits](http://yann.lecun.com/exdb/mnist/)
-- `openai` - demo of Python bindings to OpenAI API
+- `openai` - demo of Python bindings to [OpenAI API](https://platform.openai.com/docs/quickstart?language=python)
