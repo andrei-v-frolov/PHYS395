@@ -1,8 +1,12 @@
 # PyTorch model for MNIST handwritten data
 
+#######################################################################
+
 # import PyTorch libraries
 import torch
 from torch import nn
+
+#######################################################################
 
 # get CPU, GPU or MPS device for training
 device = (
@@ -11,16 +15,17 @@ device = (
     else "cpu"
 )
 
+# neural network implementation
 class NeuralNetwork(nn.Module):
     def __init__(self):
         super().__init__()
         self.flatten = nn.Flatten()
         self.linear_sigmoid_stack = nn.Sequential(
-            nn.Linear(28*28, 512),
+            nn.Linear(28*28, 11*11),
             nn.Sigmoid(),
-            nn.Linear(512, 512),
+            nn.Linear(11*11, 5*5),
             nn.Sigmoid(),
-            nn.Linear(512, 10)
+            nn.Linear(5*5, 10)
         )
 
     def forward(self, x):

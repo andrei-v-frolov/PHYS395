@@ -1,9 +1,13 @@
 # PyTorch dataset provider for MNIST handwritten data
 
+#######################################################################
+
 # import PyTorch libraries
 import torch
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
+
+#######################################################################
 
 # import IDX reader library
 import idx

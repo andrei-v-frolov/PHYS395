@@ -1,9 +1,13 @@
 # idx data format (for MNIST handwritten data)
 # http://yann.lecun.com/exdb/mnist/
 
+#######################################################################
+
 # load libraries
 import gzip
 import numpy as np
+
+#######################################################################
 
 # load 32-bit unsigned integer from bytes (in MSB-first order)
 def uint32_msb(data):
