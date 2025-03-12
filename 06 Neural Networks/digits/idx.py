@@ -4,8 +4,7 @@
 #######################################################################
 
 # load libraries
-import gzip
-import numpy as np
+import gzip, numpy as np
 
 #######################################################################
 
@@ -27,8 +26,8 @@ def open(file):
 		
 		return np.fromiter(data[4*(dims+1):], np.uint8).reshape(shape)
 
-# make an image grid of data samples
-def grid(array, nx, ny):
+# make a tiled image of 2D array samples
+def tile(array, nx, ny):
 	(n,y,x) = array.shape
 	assert nx*ny == n, "Grid shape does not conform to array size..."
 	data = array.reshape([ny,nx,y,x]); image = np.zeros([ny*y,nx*x])

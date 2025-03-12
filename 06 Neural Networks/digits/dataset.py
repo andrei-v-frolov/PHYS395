@@ -4,14 +4,12 @@
 
 # import PyTorch libraries
 import torch
-from torch.utils.data import Dataset
-from torch.utils.data import DataLoader
+from torch.utils.data import Dataset, DataLoader
 
 #######################################################################
 
 # import IDX reader library
-import idx
-import numpy as np
+import idx, numpy as np
 
 # MNIST handwritten digits dataset
 class HandwrittenDigitsDataset(Dataset):
