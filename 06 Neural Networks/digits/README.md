@@ -14,3 +14,8 @@
 - `model.py` - PyTorch neural network model for MNIST handwritten data
 - `train.py` - train, save, and test handwritten digit recognition network
 - `test.py` - render success rate on test MNIST handwritten data images
+
+### Neural network visualization
+
+- `grid.py` - addressable computed grid of pixel coordinates
+- `view.py` - visualize neural network operation and link weights

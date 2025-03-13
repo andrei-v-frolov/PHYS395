@@ -31,3 +31,37 @@ class NeuralNetwork(nn.Module):
     def forward(self, x):
         logits = self.stack(x)
         return logits
+
+#######################################################################
+
+# path-through module updating plot data
+class Plot(nn.Module):
+    def __init__(self, plot) -> None:
+        super().__init__()
+        self.plot = plot
+
+    def forward(self, x):
+        self.plot.set_array(x.cpu().numpy().flatten())
+        return x
+
+# network instrumented for plotting
+class InstrumentedNetwork(NeuralNetwork):
+    def __init__(self, trained, layer):
+        super().__init__()
+        self.stack = nn.Sequential(
+            trained.stack[0],
+            Plot(layer[0]),
+            trained.stack[1],
+            trained.stack[2],
+            Plot(layer[1]),
+            trained.stack[3],
+            trained.stack[4],
+            Plot(layer[2]),
+            trained.stack[5],
+            nn.Softmax(),
+            Plot(layer[3])
+        )
+
+    def forward(self, x):
+        logits = self.stack(x)
+        return logits
