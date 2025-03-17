@@ -53,6 +53,7 @@ plt.figure(figsize=(10,8), frameon=False)
 
 # classification success image
 s = colormap.from_list("success", ["red", "white"])
+success = success.repeat(28,0).repeat(28,1)
 plt.imshow(success, origin='upper', extent=[0,nx,0,ny], cmap=s, vmin=0.0, vmax=1.0, interpolation='none')
 
 # test data overlay image
