@@ -12,7 +12,7 @@ rng = np.random.default_rng()
 #######################################################################
 
 # grid resolution
-n = 28
+n = 56
 
 # network temperature
 beta = 2.0
@@ -28,7 +28,7 @@ sigma = choice([-1.0,1.0], (n,n))
 from PIL import Image
 
 # import 280x28 artboard with target digit images
-img = np.array(Image.open('digits.png'))
+img = np.array(Image.open('digits-2x.png'))
 
 # slice and threshold artboard into individual digits
 digit = [np.where(img[:,i*n:(i+1)*n,-1] > 190, 1.0, -1.0) for i in range(10)]
@@ -82,19 +82,18 @@ plt.tight_layout()
 from matplotlib.widgets import Slider
 
 # make room for widgets
-fig.subplots_adjust(bottom=0.22)
+fig.subplots_adjust(bottom=0.075)
 
 # user interface elements
 beta_slider = Slider(
-    ax=fig.add_axes([0.1, 0.07, 0.8, 0.03]),
+    ax=fig.add_axes([0.1, 0.02, 0.8, 0.03]),
     valmin=0.0, valmax=4.0, valinit=beta,
     label='β'
 )
 
 # update simulation parameters
 def update(value):
-	global beta
-	beta = beta_slider.val
+	global beta; beta = beta_slider.val
 
 # register update handler
 beta_slider.on_changed(update)
