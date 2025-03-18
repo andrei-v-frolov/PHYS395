@@ -14,6 +14,9 @@ rng = np.random.default_rng()
 # grid resolution
 n = 28
 
+# network temperature
+beta = 2.0
+
 # external field template
 theta = np.zeros([n,n])
 
@@ -47,7 +50,7 @@ np.fill_diagonal(W, 0.0)
 #######################################################################
 
 # synchronous downhill state update
-def update(sigma):
+def downhill(sigma):
 	return np.where(np.dot(W,sigma.flat).reshape(n,n) > theta, 1.0, -1.0)
 
 # synchronous MCMC state update
@@ -75,12 +78,35 @@ plt.tight_layout()
 
 #######################################################################
 
+# interactive controls
+from matplotlib.widgets import Slider
+
+# make room for widgets
+fig.subplots_adjust(bottom=0.22)
+
+# user interface elements
+beta_slider = Slider(
+    ax=fig.add_axes([0.1, 0.07, 0.8, 0.03]),
+    valmin=0.0, valmax=4.0, valinit=beta,
+    label='β'
+)
+
+# update simulation parameters
+def update(value):
+	global beta
+	beta = beta_slider.val
+
+# register update handler
+beta_slider.on_changed(update)
+
+#######################################################################
+
 import matplotlib.animation as animation
 
 # called to advance animation to next frame
 def animate(i):
 	global sigma
-	sigma = update(sigma)
+	sigma = mcmc(sigma, beta)
 	spins.set_data(sigma)
 
 animation = animation.FuncAnimation(fig, animate, frames=1000, interval=1000.0/60)
