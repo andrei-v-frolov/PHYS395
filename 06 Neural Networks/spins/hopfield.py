@@ -6,6 +6,9 @@
 import numpy as np
 from numpy.random import rand, choice
 
+# default random number generator
+rng = np.random.default_rng()
+
 #######################################################################
 
 # grid resolution
@@ -41,9 +44,19 @@ C = V @ V.T; W = V.T @ np.linalg.inv(C) @ V
 # remove self-coupling (not that it matters for unit spins)
 np.fill_diagonal(W, 0.0)
 
+#######################################################################
+
 # synchronous downhill state update
 def update(sigma):
 	return np.where(np.dot(W,sigma.flat).reshape(n,n) > theta, 1.0, -1.0)
+
+# synchronous MCMC state update
+def mcmc(sigma, beta=2.0):
+	s = sigma.flat
+	t = choice([-1.0,1.0], n*n)
+	force = np.dot(W,s) - theta.flat
+	alpha = np.exp(beta*force*(t-s))
+	return np.where(rand(n*n) > alpha, s, t).reshape(n,n)
 
 #######################################################################
 
