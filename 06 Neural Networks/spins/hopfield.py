@@ -22,25 +22,26 @@ sigma = choice([-1.0,1.0], (n,n))
 from PIL import Image
 
 # import 280x28 artboard with target digit images
-img = Image.open('digits.png')
-alpha = np.array(img)[...,-1]/255.0
+img = np.array(Image.open('digits.png'))
 
 # slice and threshold artboard into individual digits
-digit = [np.where(alpha[:,28*i:28*(i+1)] > 0.75, 1.0, -1.0) for i in range(10)]
+digit = [np.where(img[:,i*n:(i+1)*n,-1] > 190, 1.0, -1.0) for i in range(10)]
 
 #######################################################################
 
-# spin coupling matrix
-W = np.zeros([n*n,n*n])
+# flatten 2D images into state vectors
+V = np.array(digit).reshape(10,n*n)
 
-# Hebbian learning rule
-for i in range(10):
-	W += np.outer(digit[i],digit[i])
+# Hebbian learning rule (does not work that well...)
+#W = V.T @ V
 
-# remove self-coupling
+# use de-correlated vectors instead (kind of works)
+C = V @ V.T; W = V.T @ np.linalg.inv(C) @ V
+
+# remove self-coupling (not that it matters for unit spins)
 np.fill_diagonal(W, 0.0)
 
-# synchronous state update
+# synchronous downhill state update
 def update(sigma):
 	return np.where(np.dot(W,sigma.flat).reshape(n,n) > theta, 1.0, -1.0)
 
