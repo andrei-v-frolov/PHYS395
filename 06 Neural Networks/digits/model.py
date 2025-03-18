@@ -21,16 +21,15 @@ class NeuralNetwork(nn.Module):
         super().__init__()
         self.stack = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(28*28, 11*11),
+            nn.Linear(28*28, 11*11, bias=False),
             nn.Sigmoid(),
-            nn.Linear(11*11, 5*5),
+            nn.Linear(11*11, 5*5, bias=False),
             nn.Sigmoid(),
-            nn.Linear(5*5, 10)
+            nn.Linear(5*5, 10, bias=False)
         )
 
     def forward(self, x):
-        logits = self.stack(x)
-        return logits
+        return self.stack(x)
 
 #######################################################################
 
@@ -63,5 +62,4 @@ class InstrumentedNetwork(NeuralNetwork):
         )
 
     def forward(self, x):
-        logits = self.stack(x)
-        return logits
+        return self.stack(x)
