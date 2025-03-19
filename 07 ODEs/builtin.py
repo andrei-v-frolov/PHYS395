@@ -30,11 +30,11 @@ t = np.linspace(0.0, tmax, n)
 '''
 # stopping condition (add events=stop to driver)
 def stop(t,state):
-	x,v = state; return x
+	x,v = state; return v
 
 # stopping condition attributes (e.g. terminate)
 stop.terminal = True
-stop.direction = -1.0
+stop.direction = 1.0
 '''
 
 soln = solve_ivp(f, [t[0],t[-1]], state, method='RK45', t_eval=t)
