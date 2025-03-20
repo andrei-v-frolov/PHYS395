@@ -25,6 +25,26 @@ def E(state):
 # initial conditions and energy
 state = np.array([1.0,0.0]); E0 = E(state)
 
+#######################################################################
+# Kepler problem (six-dimensional dynamic system example)
+#######################################################################
+'''
+# number and length of steps to take
+n = 2048; dt = 2.0*np.pi/16
+
+# dynamical system to be integrated
+def f(state):
+	x,v = state.reshape([2,3]); r = sqrt(sum(x*x))
+	return np.concatenate([v,-x/r**3])
+
+# energy (should be conserved for Hamiltonian EoM)
+def E(state):
+	x,v = state.reshape([2,3]); r = sqrt(sum(x*x))
+	return sum(v*v)/2.0 - 1.0/r
+
+# initial conditions and energy
+state = np.array([1.0,0.0,0.0, 0.0,1.0,0.0]); E0 = E(state)
+'''
 
 #######################################################################
 # Euler and Runge-Kutta methods
@@ -81,10 +101,15 @@ for i in range(n):
 
 import matplotlib.pyplot as plt
 
-plt.figure()
-
 #plt.plot(t, history)
 plt.plot(t, history[:,-1], 'r-')
+
+'''
+plt.plot(history[:,0], history[:,1], '-')
+plt.gca().set_aspect('equal')
+plt.xlim([-1.5,1.5])
+plt.ylim([-1.5,1.5])
+'''
 
 plt.show()
 
