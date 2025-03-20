@@ -9,4 +9,5 @@
 ### Mechanics Examples
 
 - `ballistic.py` - interactive demo of ballistic motion
+- `phase.py` - phase space portrait of physical pendulum
 - `pendulum-1.py` - animated physical pendulum evolution
