@@ -146,6 +146,12 @@ def si(n, state, dt):
 			return state
 
 #######################################################################
+# Gauss-Legendre methods; symplectic with arbitrary Hamiltonian, A-stable
+#######################################################################
+
+from gl import gl4, gl6, gl8, gl10, gl12
+
+#######################################################################
 
 # evolution history and violation of energy conservation
 t = np.arange(1,n+1)*dt; history = np.zeros([n,len(state)+1])
@@ -153,6 +159,7 @@ t = np.arange(1,n+1)*dt; history = np.zeros([n,len(state)+1])
 # evolve dynamical system with specified method
 for i in range(n):
 	state = rk4(state, dt)
+	#state = gl4(f, state, dt)
 	history[i] = [*state, E(state)-E0]
 
 #######################################################################
