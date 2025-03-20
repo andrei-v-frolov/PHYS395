@@ -88,6 +88,64 @@ def re(n, state, dt):
 			return (w*y3 - y1)/(w - 1.0)
 
 #######################################################################
+# operator splitting methods for separable Hamiltonian (hard-coded EoM)
+#######################################################################
+
+# 1st order Hamiltonian split (oscillator)
+def si1(state, dt):
+	x,v = state
+	x +=  v*dt
+	v += -x**3*dt
+	return np.array([x,v])
+
+# 2nd order Hamiltonian split (oscillator)
+def si2(state, dt):
+	x,v = state
+	x +=  v*dt/2.0
+	v += -x**3*dt
+	x +=  v*dt/2.0
+	return np.array([x,v])
+
+'''
+# 2nd order Hamiltonian split (Kepler problem)
+def si2(state, dt):
+	x,v = state.reshape([2,3])
+	x +=  v*dt/2.0
+	r = sqrt(sum(x*x))
+	v += -x/r**3*dt
+	x +=  v*dt/2.0
+	return np.concatenate([x,v])
+'''
+
+# Yoshida 6-th order scheme timesteps
+W6 = np.array([
+	 1.31518632068391121888424972823886251E0,
+	-1.17767998417887100694641568096431573E0,
+	 0.235573213359358133684793182978534602E0,
+	 0.784513610477557263819497633866349876E0
+])
+
+# 6th order symplectic integrator
+def si6(state, dt):
+	for i in range(-3,4):
+		state = si2(state, W6[abs(i)]*dt)
+	return state
+
+# n-th order symplectic integrator (even n only)
+def si(n, state, dt):
+	match n:
+		case 1: return si1(state, dt)
+		case 2: return si2(state, dt)
+		case 6: return si6(state, dt)
+		case k:
+			gamma = 1.0/(k-1.0)
+			alpha = 1.0/(2.0 - 2.0**gamma)
+			state = si(k-2, state, alpha*dt)
+			state = si(k-2, state, (1.0-2.0*alpha)*dt)
+			state = si(k-2, state, alpha*dt)
+			return state
+
+#######################################################################
 
 # evolution history and violation of energy conservation
 t = np.arange(1,n+1)*dt; history = np.zeros([n,len(state)+1])
