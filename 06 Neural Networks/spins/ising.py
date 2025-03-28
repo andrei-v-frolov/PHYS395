@@ -10,7 +10,7 @@ from numpy.random import rand, choice
 #######################################################################
 
 # grid resolution
-n = 201
+n = 512
 
 # site parity mask
 X,Y = np.meshgrid(range(n),range(n)); parity = X+Y
@@ -45,7 +45,8 @@ import matplotlib.pyplot as plt
 from matplotlib import colors
 from matplotlib.lines import Line2D
 
-fig = plt.figure(); ax = fig.gca()
+fig = plt.figure(figsize=(48/5,27/5), frameon=False)
+ax = fig.gca(); ax.set_aspect('equal')
 
 # spin orientation map
 crt = colors.LinearSegmentedColormap.from_list("CRT", ['black', 'greenyellow'])
@@ -55,13 +56,17 @@ spins = plt.imshow(sigma, origin='lower', vmin=-1.0, vmax=1.0, cmap=crt, interpo
 gauge = colors.LinearSegmentedColormap.from_list("magnet", ['blue', 'darkgreen', 'red'])
 magnet = ax.add_line(Line2D([1.03*n,1.03*n], [n/2,n/2], color=gauge(0), linewidth=7, solid_capstyle='butt', clip_on=False, zorder=3))
 
+# no ticks and tight framing
+plt.tick_params(left=False, right=False, labelleft=False, labelbottom = False, bottom=False)
+plt.tight_layout()
+
 #######################################################################
 
 # interactive controls
 from matplotlib.widgets import Slider
 
 # make room for widgets
-fig.subplots_adjust(bottom=0.22)
+fig.subplots_adjust(bottom=0.12)
 
 # user interface elements
 beta_slider = Slider(

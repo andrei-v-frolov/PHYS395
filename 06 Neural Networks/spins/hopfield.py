@@ -3,6 +3,7 @@
 
 #######################################################################
 
+from math import *
 import numpy as np
 from numpy.random import rand, choice
 
@@ -28,7 +29,7 @@ sigma = choice([-1.0,1.0], (n,n))
 from PIL import Image
 
 # import 280x28 artboard with target digit images
-img = np.array(Image.open('digits-2x.png'))
+img = np.array(Image.open('plants-2x.png'))
 
 # slice and threshold artboard into individual digits
 digit = [np.where(img[:,i*n:(i+1)*n,-1] > 190, 1.0, -1.0) for i in range(10)]
@@ -66,7 +67,8 @@ def mcmc(sigma, beta=2.0):
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap as colormap
 
-fig = plt.figure(); ax = fig.gca()
+fig = plt.figure(figsize=(48/5,27/5), frameon=False)
+ax = fig.gca(); ax.set_aspect('equal')
 
 # spin orientation map
 crt = colormap.from_list("CRT", ['black', 'greenyellow'])
@@ -104,11 +106,13 @@ import matplotlib.animation as animation
 
 # called to advance animation to next frame
 def animate(i):
-	global sigma
+	global sigma, beta
+	#beta = 5.0*tanh(4*sin(pi*i/100)**2)
+	#beta = 5.0*tanh(6*sin(pi*i/100)**4)
 	sigma = mcmc(sigma, beta)
 	spins.set_data(sigma)
 
-animation = animation.FuncAnimation(fig, animate, frames=1000, interval=1000.0/60)
+animation = animation.FuncAnimation(fig, animate, frames=3000, interval=1000.0/60)
 #animation.save('hopfield.mp4')
 
 plt.show()
