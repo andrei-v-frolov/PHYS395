@@ -2,9 +2,9 @@
 
 ### Data products
 
-- `data` - [MNIST database of handwritten digits](http://yann.lecun.com/exdb/mnist/)
-- `models` - saved models (after a few epochs of training)
-- `images` - training, test, and success rate renders
+- `data/` - [MNIST database of handwritten digits](http://yann.lecun.com/exdb/mnist/)
+- `models/` - saved models (after a few epochs of training)
+- `images/` - training, test, and success rate renders
 
 ### Neural network implementation
 
