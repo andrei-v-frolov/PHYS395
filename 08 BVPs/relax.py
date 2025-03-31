@@ -9,7 +9,7 @@ from numpy.linalg import solve
 #######################################################################
 
 # number of modes and compactification scale
-n = 32; l = 3.0
+n = 50; l = 3.0
 
 # Chebyshev half-grid (for odd modes only!)
 dt = np.pi/(2*n); t = np.linspace(np.pi/2.0-dt/2.0, dt/2.0, n)
