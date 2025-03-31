@@ -21,7 +21,7 @@ D = np.zeros([n,n])
 for i in range(n):
 	k = 2*i+1
 	B[i] = np.cos(k*t)
-	D[i] = -k * (k*np.sin(t)*np.cos(k*t) + 2.0*np.cos(t)*np.sin(k*t)) * np.sin(t)**3/(l*l)
+	D[i] = -k * (k*np.sin(t)*np.cos(k*t) + 2*np.cos(t)*np.sin(k*t)) * np.sin(t)**3/l**2
 
 L = solve(B,D).T
 
