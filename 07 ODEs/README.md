@@ -15,3 +15,4 @@
 ### Resonance
 
 - `resonance.py` - animated physical pendulum resonance demo
+- `floquet-?.py` - parametric resonance and Floquet exponents
