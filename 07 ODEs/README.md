@@ -11,6 +11,8 @@
 - `ballistic.py` - interactive demo of ballistic motion
 - `phase.py` - phase space portrait of physical pendulum
 - `pendulum-1.py` - animated physical pendulum evolution
+- `pendulum-2.py` - animated double pendulum evolution
+- `dpflip.py` - time it takes for double pendulum to flip
 
 ### Resonance
 
