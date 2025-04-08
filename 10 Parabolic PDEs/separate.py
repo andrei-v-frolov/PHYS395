@@ -16,7 +16,7 @@ n = 100; l = 1.0
 dx = 2.0*l/(n-1); x = np.linspace(-l,l,n)
 
 # initial field profile
-phi = choice([-1.0,1.0], (n,n))
+phi = choice([-1.0,1.0], (n,n), p=[0.6,0.4])
 
 #######################################################################
 
@@ -43,9 +43,15 @@ def step(i):
 import matplotlib.pyplot as plt
 from matplotlib import colors
 
-fig = plt.figure(); ax = fig.gca()
+fig = plt.figure(figsize=(48/5,27/5), frameon=False)
+ax = fig.gca(); ax.set_aspect('equal')
+
 crt = colors.LinearSegmentedColormap.from_list("CRT", ['black', 'greenyellow'])
 wave = plt.imshow(phi, extent=[-l,l,-l,l], vmin=-1.0, vmax=1.0, cmap=crt, interpolation='none')
+
+# no ticks and tight framing
+plt.tick_params(left=False, right=False, labelleft=False, labelbottom = False, bottom=False)
+plt.tight_layout()
 
 #######################################################################
 
