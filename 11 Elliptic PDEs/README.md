@@ -9,3 +9,4 @@
 ### Physics Examples
 
 - `skyline.py` - potential between clouds and Vancouver skyline
+- `waveguide.py` - TM-polarized modes in cylindrical waveguide
