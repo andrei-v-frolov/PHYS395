@@ -9,3 +9,4 @@
 ### Eigenvalue problems
 
 - `rayleigh.py` - Rayleigh iteration solver for eigenvalue problem
+- `quantum.py` - energy eigenstates of quantum anharmonic oscillator
