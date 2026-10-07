@@ -13,7 +13,7 @@ verbose = True
 
 class grid:
 	# initialize grid hierarchy (with optional mask)
-	def __init__(self, phi, dx, m2=0.0, rhs=0.0, mask=None, bc='constant', cval=0.0, level=0):
+	def __init__(self, phi, dx, m2=0.0, rhs=0.0, mask=None, bc='constant', cval=0.0, level=0, animator=None):
 		self.phi = phi; self.rho = rhs; self.mask = mask
 		self.level = level; self.bc = bc; self.cval = cval
 
@@ -35,9 +35,12 @@ class grid:
 		# initialize coarse subgrid (if large enough)
 		if self.pixels > 256:
 			cmask = None if (mask is None) else self.shrink(mask)
-			self.coarse = grid(self.downgrade(phi), 2.0*dx, m2, mask=cmask, bc=bc, cval=cval, level=level+1)
+			self.coarse = grid(self.downgrade(phi), 2.0*dx, m2, mask=cmask, bc=bc, cval=cval, level=level+1, animator=animator)
 		else:
 			self.coarse = None
+
+		# animation callback
+		self.animator = animator
 
 	# residual of stencil[phi] = rho (optionally masked)
 	def residual(self):
@@ -48,6 +51,7 @@ class grid:
 	def smooth(self, iterations):
 		for i in range(iterations):
 			self.phi += self.residual()*self.dt
+			if self.animator is not None: self.animator(self)
 	
 	# shrink mask to coarser grid
 	def shrink(self, mask):
