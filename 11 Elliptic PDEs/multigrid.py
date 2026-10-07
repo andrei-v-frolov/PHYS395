@@ -51,7 +51,7 @@ class grid:
 	
 	# shrink mask to coarser grid
 	def shrink(self, mask):
-		return maximum_filter(mask,5)[::2,::2]
+		return maximum_filter(mask,4)[1::2,1::2]
 
 	# downgrade data to coarser grid
 	def downgrade(self, data, resample=Image.BILINEAR):
